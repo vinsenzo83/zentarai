@@ -94,14 +94,40 @@ export function homePage(): string {
             </div>`).join('')}
           </div>
 
-          <!-- Contract Address Banner (TGE 이전) -->
+          <!-- Contract Address Banner (Pre-TGE) -->
           <div style="display:flex;align-items:center;gap:10px;padding:0.6rem 0.875rem;background:rgba(251,191,36,0.05);border:1px solid rgba(251,191,36,0.2);animation:z-glow-in 0.6s ease 0.45s both;">
             <i class="fas fa-clock" style="color:#f3ba2f;font-size:0.75rem;flex-shrink:0;"></i>
             <div style="flex:1;min-width:0;">
               <span style="font-family:var(--z-mono);font-size:0.58rem;color:#f3ba2f;letter-spacing:1px;text-transform:uppercase;">TOKEN CONTRACT</span>
-              <span style="font-family:var(--z-mono);font-size:0.68rem;color:var(--z-dim);margin-left:8px;">TGE Q2 2026 이후 공개 예정</span>
+              <span style="font-family:var(--z-mono);font-size:0.68rem;color:var(--z-dim);margin-left:8px;">Will be published after TGE Q2 2026</span>
             </div>
             <span style="font-family:var(--z-mono);font-size:0.6rem;color:var(--z-dim);border:1px solid rgba(255,255,255,0.08);padding:2px 8px;white-space:nowrap;flex-shrink:0;">PRE-TGE</span>
+          </div>
+
+          <!-- Brand Assets Download -->
+          <div style="display:flex;align-items:center;gap:10px;padding:0.65rem 0.875rem;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.12);margin-top:0.5rem;animation:z-glow-in 0.6s ease 0.5s both;">
+            <img src="/static/logo-icon.svg" alt="ZentarAI Logo" style="width:28px;height:28px;flex-shrink:0;"/>
+            <div style="flex:1;min-width:0;">
+              <div style="font-family:var(--z-mono);font-size:0.58rem;color:${C};letter-spacing:1px;text-transform:uppercase;">BRAND ASSETS</div>
+              <div style="font-size:0.65rem;color:var(--z-dim);margin-top:1px;">Official logo kit — SVG format</div>
+            </div>
+            <div style="display:flex;gap:6px;flex-shrink:0;">
+              <a href="/static/logo-square.svg" download="zentarai-logo-square.svg"
+                 style="display:inline-flex;align-items:center;gap:4px;font-family:var(--z-mono);font-size:0.6rem;color:${C};border:1px solid ${C}30;padding:3px 8px;text-decoration:none;transition:all 0.2s;letter-spacing:0.5px;"
+                 onmouseover="this.style.background='${C}15'" onmouseout="this.style.background='transparent'">
+                <i class="fas fa-download" style="font-size:0.55rem;"></i> 1:1
+              </a>
+              <a href="/static/logo-horizontal.svg" download="zentarai-logo-horizontal.svg"
+                 style="display:inline-flex;align-items:center;gap:4px;font-family:var(--z-mono);font-size:0.6rem;color:${C};border:1px solid ${C}30;padding:3px 8px;text-decoration:none;transition:all 0.2s;letter-spacing:0.5px;"
+                 onmouseover="this.style.background='${C}15'" onmouseout="this.style.background='transparent'">
+                <i class="fas fa-download" style="font-size:0.55rem;"></i> 16:3
+              </a>
+              <a href="/static/logo-icon.svg" download="zentarai-logo-icon.svg"
+                 style="display:inline-flex;align-items:center;gap:4px;font-family:var(--z-mono);font-size:0.6rem;color:${C};border:1px solid ${C}30;padding:3px 8px;text-decoration:none;transition:all 0.2s;letter-spacing:0.5px;"
+                 onmouseover="this.style.background='${C}15'" onmouseout="this.style.background='transparent'">
+                <i class="fas fa-download" style="font-size:0.55rem;"></i> icon
+              </a>
+            </div>
           </div>
         </div>
 
@@ -249,7 +275,7 @@ export function homePage(): string {
 
   /* ══════════════════════════════════════
      INTERACTIVE DEMO SECTION
-     (wallet 연결 없이 시스템 시연)
+     (live demo — no wallet required)
   ══════════════════════════════════════ */
   const demo = `
   <div class="z-hr"></div>
@@ -952,7 +978,7 @@ export function homePage(): string {
   /* ── CHARTS ── */
   const charts = `
   <script>
-  // Chart.js가 async 로딩이므로 준비 완료 후 실행
+  // Chart.js async loading — execute after ready
   function initCharts(){
   (function(){
     // Tokenomics donut
@@ -1043,12 +1069,12 @@ export function homePage(): string {
     });
   })();
   }
-  // Chart.js async 대응: 로드 완료 시점에 맞춰 실행
+  // Chart.js async compat: run when load completes
   if(typeof Chart !== 'undefined'){
     initCharts();
   } else {
     document.querySelector('script[src*="chart.js"]').addEventListener('load', initCharts);
-    // fallback: 1초 후에도 Chart가 없으면 재시도
+    // fallback: retry after 1s if Chart not ready
     setTimeout(function(){ if(typeof Chart !== 'undefined' && !window._chartDone){ initCharts(); window._chartDone=true; } }, 1000);
   }
   </script>`
