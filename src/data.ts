@@ -22,9 +22,9 @@ export const PROJECT = {
     github: 'https://github.com/vinsenzo83/zentarai',
     twitter: 'https://x.com/intellora_',
     telegram: 'https://t.me/ZentarAI',
-    bscscan: 'https://bscscan.com/token/0x33c5502261c589a2EC4B1a6C4350aBF60ef47254',
+    bscscan: '',  // TGE 이후 업데이트 예정
   },
-  contractAddress: '0x33c5502261c589a2EC4B1a6C4350aBF60ef47254',
+  contractAddress: '',  // 토큰 미발행 — TGE Q2 2026 이후 업데이트
   tokenKey: '',
   sourceCodeUrl: 'https://github.com/vinsenzo83/zentarai/archive/refs/heads/main.zip',
   team: [
@@ -75,14 +75,14 @@ export const PROJECT = {
     { icon: 'fas fa-chart-line', title: 'Predictive Analytics', desc: 'Forward-looking intelligence that identifies trends before they become obvious.' },
     { icon: 'fas fa-network-wired', title: 'Ecosystem Intelligence', desc: 'Cross-protocol data aggregation for holistic market understanding.' },
     { icon: 'fas fa-bolt', title: 'Real-time Decisioning', desc: 'Sub-second signal processing ensures you act on intelligence, not lag.' },
-    { icon: 'fas fa-shield-alt', title: 'Verified & Audited', desc: 'Smart contracts audited by CertiK. Transparent on BNB Chain.' },
+    { icon: 'fas fa-shield-alt', title: 'Verified & Audited', desc: 'CertiK audit planned pre-TGE. Contract will be published on BNB Chain at TGE Q2 2026.' },
     { icon: 'fas fa-coins', title: 'ZNTR Token', desc: 'Governance, staking rewards, and premium signal access powered by ZNTR.' },
   ],
   faq: [
     { q: 'What is ZentarAI?', a: 'ZentarAI is an AI-powered predictive intelligence platform built on BNB Chain, turning real-time on-chain and off-chain signals into actionable ecosystem strategy.' },
     { q: 'What is the ZNTR token used for?', a: 'ZNTR is used for governance voting, staking to earn platform rewards, and accessing premium AI signal feeds and predictive dashboards.' },
     { q: 'When is the TGE?', a: 'The Token Generation Event (TGE) is planned for Q2 2026, with subsequent PancakeSwap listing shortly after.' },
-    { q: 'Is ZentarAI audited?', a: 'Yes. Smart contracts are audited by CertiK and verified on BSCScan for full transparency.' },
+    { q: 'Is ZentarAI audited?', a: 'A CertiK audit is planned before TGE (Q2 2026). The smart contract address will be published on BSCScan upon token launch. Our repository is already open-source on GitHub.' },
     { q: 'How do I participate in the Private Sale?', a: 'Connect your wallet on our platform and complete KYC to access the private sale allocation. Details available in the Whitepaper.' },
     { q: 'What chain is ZNTR deployed on?', a: 'ZNTR is a BEP-20 token deployed on BNB Chain (BSC Mainnet, Chain ID: 56).' },
   ],

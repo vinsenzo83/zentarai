@@ -94,18 +94,14 @@ export function homePage(): string {
             </div>`).join('')}
           </div>
 
-          <!-- Contract Address Banner -->
+          <!-- Contract Address Banner (TGE 이전) -->
           <div style="display:flex;align-items:center;gap:10px;padding:0.6rem 0.875rem;background:rgba(251,191,36,0.05);border:1px solid rgba(251,191,36,0.2);animation:z-glow-in 0.6s ease 0.45s both;">
-            <i class="fas fa-file-contract" style="color:#f3ba2f;font-size:0.75rem;flex-shrink:0;"></i>
+            <i class="fas fa-clock" style="color:#f3ba2f;font-size:0.75rem;flex-shrink:0;"></i>
             <div style="flex:1;min-width:0;">
-              <span style="font-family:var(--z-mono);font-size:0.58rem;color:#f3ba2f;letter-spacing:1px;text-transform:uppercase;">CONTRACT</span>
-              <span style="font-family:var(--z-mono);font-size:0.68rem;color:var(--z-muted);margin-left:8px;word-break:break-all;">${PROJECT.contractAddress}</span>
+              <span style="font-family:var(--z-mono);font-size:0.58rem;color:#f3ba2f;letter-spacing:1px;text-transform:uppercase;">TOKEN CONTRACT</span>
+              <span style="font-family:var(--z-mono);font-size:0.68rem;color:var(--z-dim);margin-left:8px;">TGE Q2 2026 이후 공개 예정</span>
             </div>
-            <a href="https://bscscan.com/token/${PROJECT.contractAddress}" target="_blank" rel="noopener"
-              style="font-family:var(--z-mono);font-size:0.6rem;color:#f3ba2f;border:1px solid rgba(251,191,36,0.3);padding:2px 8px;white-space:nowrap;text-decoration:none;flex-shrink:0;"
-              onmouseover="this.style.background='rgba(251,191,36,0.1)'" onmouseout="this.style.background='transparent'">
-              BSCScan ↗
-            </a>
+            <span style="font-family:var(--z-mono);font-size:0.6rem;color:var(--z-dim);border:1px solid rgba(255,255,255,0.08);padding:2px 8px;white-space:nowrap;flex-shrink:0;">PRE-TGE</span>
           </div>
         </div>
 
@@ -197,7 +193,7 @@ export function homePage(): string {
   </script>`
 
   /* ══════════════════════════════════════
-     CONTRACT ADDRESS TOP BANNER
+     TOKEN STATUS TOP BANNER (PRE-TGE)
   ══════════════════════════════════════ */
   const contractBanner = `
   <div style="background:#0a0f08;border-bottom:1px solid rgba(251,191,36,0.15);padding:0.5rem 0;overflow:hidden;position:relative;">
@@ -205,18 +201,11 @@ export function homePage(): string {
       <div style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:8px;">
           <span style="width:6px;height:6px;background:#f3ba2f;display:block;animation:z-signal-pulse 2s infinite;"></span>
-          <span style="font-family:var(--z-mono);font-size:0.65rem;color:#f3ba2f;letter-spacing:1px;text-transform:uppercase;">ZNTR CONTRACT ADDRESS</span>
+          <span style="font-family:var(--z-mono);font-size:0.65rem;color:#f3ba2f;letter-spacing:1px;text-transform:uppercase;">ZNTR TOKEN</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="font-family:var(--z-mono);font-size:0.72rem;color:var(--z-muted);letter-spacing:0.5px;">${PROJECT.contractAddress}</span>
-          <button onclick="navigator.clipboard.writeText('${PROJECT.contractAddress}').then(()=>{ this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy',1500); })"
-            style="font-family:var(--z-mono);font-size:0.6rem;color:#f3ba2f;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);padding:2px 10px;cursor:pointer;transition:background 0.2s;"
-            onmouseover="this.style.background='rgba(251,191,36,0.15)'" onmouseout="this.style.background='rgba(251,191,36,0.08)'">Copy</button>
-          <a href="https://bscscan.com/token/${PROJECT.contractAddress}" target="_blank" rel="noopener"
-            style="font-family:var(--z-mono);font-size:0.6rem;color:#f3ba2f;border:1px solid rgba(251,191,36,0.25);padding:2px 10px;text-decoration:none;background:rgba(251,191,36,0.05);"
-            onmouseover="this.style.background='rgba(251,191,36,0.12)'" onmouseout="this.style.background='rgba(251,191,36,0.05)'">
-            BSCScan ↗
-          </a>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-family:var(--z-mono);font-size:0.7rem;color:var(--z-muted);">Contract address will be published after TGE</span>
+          <span style="font-family:var(--z-mono);font-size:0.62rem;color:#f3ba2f;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);padding:2px 10px;">PRE-TGE</span>
         </div>
         <div style="display:flex;align-items:center;gap:6px;">
           <i class="fas fa-link" style="color:#f3ba2f;font-size:0.6rem;"></i>
@@ -420,7 +409,7 @@ export function homePage(): string {
             {icon:'fas fa-satellite-dish', c:C,         title:'Real-Time Data Bus',       desc:'Ingests blockchain events, wallet signals, and social feeds with sub-second normalization across 500+ sources.', tags:['On-chain','Social','DEX flows']},
             {icon:'fas fa-brain',          c:CL,        title:'Adversarial ML Engine',    desc:'Six proprietary models run in parallel — anomaly detection, sentiment fusion, whale classification, and trend forecasting.', tags:['Anomaly','Sentiment','Forecast']},
             {icon:'fas fa-bolt',           c:'#fbbf24', title:'Signal Delivery API',      desc:'RESTful Signal API v1 exposes processed intelligence to DAOs, protocols, and builders with webhook alert support.', tags:['REST API','Webhooks','DAO feeds']},
-            {icon:'fas fa-shield-alt',     c:'#22c55e', title:'Verified Smart Contracts', desc:'All ZNTR contracts source-verified on BSCScan. CertiK audit planned pre-TGE Q2 2026. Open-source repository.', tags:['CertiK','BSCScan','Open-source']},
+            {icon:'fas fa-shield-alt',     c:'#22c55e', title:'Verified Smart Contracts', desc:'ZNTR smart contracts will be source-verified on BSCScan at TGE. CertiK audit planned pre-TGE Q2 2026. Open-source repository available now.', tags:['CertiK (planned)','Open-source','Pre-TGE']},
           ].map((f,i) => `
           <div class="z-card" style="padding:1.25rem 1.5rem;display:flex;gap:1rem;animation:z-glow-in 0.5s ease ${i*0.1}s both;">
             <div style="width:42px;height:42px;background:${f.c}12;border:1px solid ${f.c}25;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
