@@ -18,7 +18,7 @@ export function layout(title: string, body: string, extraHead = ''): string {
   <meta property="og:type" content="website"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   ${extraHead}
   <style>
@@ -482,69 +482,77 @@ const _cntObs = new IntersectionObserver(entries=>{
 },{threshold:0.5});
 document.querySelectorAll('[data-target]').forEach(el=>_cntObs.observe(el));
 
-// ── Particle System ──
+// ── Particle System (lightweight - CSS-only, 12 static elements) ──
 (function(){
   const container = document.getElementById('z-particle-field');
   if(!container) return;
-  const colors = ['${C}','#06b6d4','${CL}','#8b5cf6'];
-  for(let i=0;i<28;i++){
-    const p = document.createElement('div');
-    const size = 2 + Math.random()*4;
-    p.style.cssText = [
-      'position:absolute',
-      'border-radius:50%',
-      'pointer-events:none',
-      'width:'+size+'px',
-      'height:'+size+'px',
-      'left:'+(Math.random()*100)+'%',
-      'top:'+(Math.random()*100)+'%',
-      'background:'+colors[Math.floor(Math.random()*colors.length)],
-      'opacity:'+(0.2+Math.random()*0.6),
-      '--dur:'+(2+Math.random()*4)+'s',
-      '--delay:'+(-Math.random()*4)+'s',
-      'animation:z-particle-rise var(--dur) ease-out var(--delay) infinite',
-    ].join(';');
-    container.appendChild(p);
-  }
+  // Use requestIdleCallback for non-blocking init
+  const init = function(){
+    const colors = ['${C}88','#06b6d455','${CL}66'];
+    const frag = document.createDocumentFragment();
+    for(let i=0;i<12;i++){
+      const p = document.createElement('div');
+      const size = 2 + (i%3)*1.5;
+      const col = colors[i%3];
+      p.setAttribute('style',
+        'position:absolute;border-radius:50%;pointer-events:none;'+
+        'width:'+size+'px;height:'+size+'px;'+
+        'left:'+(5+i*8)+'%;top:'+(10+((i*17)%80))+'%;'+
+        'background:'+col+';'+
+        'animation:z-particle-rise '+(3+i*0.4)+'s ease-out -'+(i*0.3)+'s infinite'
+      );
+      frag.appendChild(p);
+    }
+    container.appendChild(frag);
+  };
+  if('requestIdleCallback' in window){ requestIdleCallback(init,{timeout:2000}); }
+  else { setTimeout(init,500); }
 })();
 
-// ── Live signal feed (dynamic) ──
+// ── Live signal feed (dynamic, deferred after page load) ──
 (function(){
-  const feed = document.getElementById('z-live-feed');
-  if(!feed) return;
-  const signals = [
-    {type:'WHALE',    msg:'0x9f2c moved 4.8M ZNTR — accumulation detected',   c:'${C}',     icon:'fa-fish'},
-    {type:'TREND',    msg:'Bullish divergence — RSI 14d cross confirmed',       c:'#22c55e',  icon:'fa-chart-line'},
-    {type:'ANOMALY',  msg:'TVL spike +18% on PancakeSwap — protocol alert',     c:'#f97316',  icon:'fa-exclamation'},
-    {type:'SENTIMENT',msg:'Social signal: 89↑ across 18 feeds — 4hr window',   c:'#8b5cf6',  icon:'fa-brain'},
-    {type:'PROTOCOL', msg:'Validator participation +9% — network health +',     c:'${CL}',    icon:'fa-shield-alt'},
-    {type:'WHALE',    msg:'Smart wallet 0x4a1d entered at support zone',        c:'${C}',     icon:'fa-fish'},
-    {type:'TREND',    msg:'Pattern: inverse H&S forming — 85% confidence',      c:'#fbbf24',  icon:'fa-chart-bar'},
-    {type:'ANOMALY',  msg:'Cross-chain bridge volume +34% — unusual activity',  c:'#ef4444',  icon:'fa-random'},
-    {type:'SENTIMENT',msg:'Fear & Greed index shift: 42→61 in 6hr window',      c:'#06b6d4',  icon:'fa-heart-pulse'},
-    {type:'PROTOCOL', msg:'ZNTR staking APY signal updated — 12.4% current',   c:'#10b981',  icon:'fa-lock'},
-  ];
-  let idx = 0;
-  function addLine(){
-    const s = signals[idx % signals.length]; idx++;
-    const row = document.createElement('div');
-    row.style.cssText = 'display:flex;align-items:center;gap:8px;padding:6px 10px;background:'+s.c+'06;border-left:2px solid '+s.c+'55;margin-bottom:1px;opacity:0;transition:opacity 0.4s ease;';
-    row.innerHTML = '<i class="fas '+s.icon+'" style="color:'+s.c+';font-size:0.65rem;flex-shrink:0;width:12px;"></i>'
-      + '<span style="font-family:Space Mono,monospace;font-size:0.6rem;color:'+s.c+';flex-shrink:0;letter-spacing:1px;">['+s.type+']</span>'
-      + '<span style="font-size:0.7rem;color:#6b7d8a;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+s.msg+'</span>'
-      + '<span style="font-family:Space Mono,monospace;font-size:0.58rem;color:#3a4a54;">now</span>';
-    feed.insertBefore(row, feed.firstChild);
-    requestAnimationFrame(()=>{ row.style.opacity='1'; });
-    // keep max 8 rows
-    while(feed.children.length > 8){
-      const last = feed.lastChild;
-      if(last){ last.style.opacity='0'; setTimeout(()=>{ if(last.parentNode) last.parentNode.removeChild(last); },400); }
+  const initFeed = function(){
+    const feed = document.getElementById('z-live-feed');
+    if(!feed) return;
+    const C = '${C}', CL = '${CL}';
+    const signals = [
+      {type:'WHALE',    msg:'0x9f2c moved 4.8M ZNTR \u2014 accumulation detected',   c:C,         icon:'fa-fish'},
+      {type:'TREND',    msg:'Bullish divergence \u2014 RSI 14d cross confirmed',       c:'#22c55e', icon:'fa-chart-line'},
+      {type:'ANOMALY',  msg:'TVL spike +18% on PancakeSwap \u2014 protocol alert',    c:'#f97316', icon:'fa-exclamation'},
+      {type:'SENTIMENT',msg:'Social signal: 89\u2191 across 18 feeds \u2014 4hr',     c:'#8b5cf6', icon:'fa-brain'},
+      {type:'PROTOCOL', msg:'Validator participation +9% \u2014 network health +',    c:CL,        icon:'fa-shield-alt'},
+      {type:'WHALE',    msg:'Smart wallet 0x4a1d entered at support zone',            c:C,         icon:'fa-fish'},
+      {type:'TREND',    msg:'Pattern: inverse H&amp;S forming \u2014 85% confidence', c:'#fbbf24', icon:'fa-chart-bar'},
+      {type:'ANOMALY',  msg:'Bridge volume +34% \u2014 unusual cross-chain activity', c:'#ef4444', icon:'fa-random'},
+      {type:'SENTIMENT',msg:'Fear &amp; Greed: 42\u219261 shift in 6hr window',       c:'#06b6d4', icon:'fa-heart-pulse'},
+      {type:'PROTOCOL', msg:'ZNTR staking APY signal updated \u2014 12.4% current',  c:'#10b981', icon:'fa-lock'},
+    ];
+    let idx = 0;
+    function addLine(){
+      const s = signals[idx % signals.length]; idx++;
+      const row = document.createElement('div');
+      row.setAttribute('style',
+        'display:flex;align-items:center;gap:8px;padding:6px 10px;'+
+        'background:'+s.c+'08;border-left:2px solid '+s.c+'44;'+
+        'margin-bottom:1px;opacity:0;transition:opacity 0.35s;'
+      );
+      row.innerHTML =
+        '<i class="fas '+s.icon+'" style="color:'+s.c+';font-size:0.62rem;flex-shrink:0;width:11px;"></i>'+
+        '<span style="font-family:\'Space Mono\',monospace;font-size:0.59rem;color:'+s.c+';flex-shrink:0;letter-spacing:0.8px;">['+s.type+']</span>'+
+        '<span style="font-size:0.68rem;color:#6b7d8a;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+s.msg+'</span>'+
+        '<span style="font-family:\'Space Mono\',monospace;font-size:0.56rem;color:#3a4a54;flex-shrink:0;">now</span>';
+      feed.insertBefore(row, feed.firstChild);
+      requestAnimationFrame(function(){ row.style.opacity='1'; });
+      while(feed.children.length > 6){
+        const last = feed.lastChild;
+        if(last){ last.style.opacity='0'; setTimeout(function(){ if(last.parentNode) last.parentNode.removeChild(last); },300); }
+      }
     }
-  }
-  // initial burst
-  for(let i=0;i<5;i++) setTimeout(addLine, i*300);
-  // periodic updates
-  setInterval(addLine, 2800);
+    for(let i=0;i<4;i++) setTimeout(addLine, 600+i*500);
+    setInterval(addLine, 3500);
+  };
+  if(document.readyState==='complete'){ setTimeout(initFeed,200); }
+  else { window.addEventListener('load',function(){ setTimeout(initFeed,200); }); }
 })();
 </script>
 </body>
@@ -565,6 +573,7 @@ function navbar(): string {
     <a href="/#architecture" class="z-nav-link">Architecture</a>
     <a href="/#token" class="z-nav-link">ZNTR</a>
     <a href="/#network" class="z-nav-link">Network</a>
+    <a href="/#partners" class="z-nav-link">Partners</a>
     <a href="/whitepaper" class="z-nav-link">Docs</a>
     <a href="${PROJECT.urls.twitter}" target="_blank" class="z-nav-link" style="font-size:0.9rem;"><i class="fab fa-x-twitter"></i></a>
     <a href="${PROJECT.urls.telegram}" target="_blank" class="z-nav-link" style="font-size:0.9rem;"><i class="fab fa-telegram"></i></a>
@@ -581,6 +590,7 @@ function navbar(): string {
   <a href="/#architecture" class="z-nav-link" style="font-size:0.95rem;text-transform:none;">Architecture</a>
   <a href="/#token" class="z-nav-link" style="font-size:0.95rem;text-transform:none;">ZNTR Token</a>
   <a href="/#network" class="z-nav-link" style="font-size:0.95rem;text-transform:none;">Network</a>
+  <a href="/#partners" class="z-nav-link" style="font-size:0.95rem;text-transform:none;">Partners</a>
   <a href="/whitepaper" class="z-nav-link" style="font-size:0.95rem;text-transform:none;">Docs</a>
   <a href="/login" class="z-nav-cta" style="width:fit-content;"><i class="fas fa-terminal" style="font-size:0.7rem;"></i> init_wallet</a>
 </div>`
