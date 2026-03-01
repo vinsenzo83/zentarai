@@ -7,679 +7,857 @@ const CL = PROJECT.colorLight
 
 export function homePage(): string {
 
-  /* ── HERO ── */
+  /* ══════════════════════════════════════
+     HERO — Terminal + Live Signal Feed
+  ══════════════════════════════════════ */
   const hero = `
-  <section id="home" style="min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:80px;">
-    <div class="grid-bg" style="position:absolute;inset:0;opacity:0.5;"></div>
-    <div style="position:absolute;top:5%;left:-5%;width:600px;height:600px;background:radial-gradient(circle,${C}18 0%,transparent 70%);border-radius:50%;filter:blur(60px);animation:pulse-glow 8s ease-in-out infinite;pointer-events:none;"></div>
-    <div style="position:absolute;bottom:10%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,${CL}0e 0%,transparent 70%);border-radius:50%;filter:blur(70px);animation:pulse-glow 10s ease-in-out infinite 3s;pointer-events:none;"></div>
+  <section id="home" style="min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:64px;">
 
-    <div class="section-inner" style="width:100%;position:relative;z-index:1;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;" id="hero-grid">
-        <!-- Left -->
+    <!-- Animated dot grid -->
+    <div class="z-dot-bg" style="position:absolute;inset:0;opacity:0.35;pointer-events:none;"></div>
+
+    <!-- Particle field container (JS populated) -->
+    <div id="z-particle-field" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
+
+    <!-- Radial gradient orbs -->
+    <div style="position:absolute;top:-10%;left:-8%;width:700px;height:700px;background:radial-gradient(circle,${C}10 0%,transparent 65%);pointer-events:none;animation:z-float 12s ease-in-out infinite;"></div>
+    <div style="position:absolute;bottom:-15%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,#06b6d410 0%,transparent 65%);pointer-events:none;animation:z-float 9s ease-in-out infinite 4s;"></div>
+
+    <!-- Animated horizontal scan line -->
+    <div style="position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,${C}33,transparent);pointer-events:none;animation:z-scan 6s linear infinite;top:0;"></div>
+
+    <!-- Vertical scan line -->
+    <div style="position:absolute;left:50%;top:0;width:1px;height:100%;background:linear-gradient(180deg,transparent,${C}22,transparent);pointer-events:none;"></div>
+
+    <!-- Corner decorations -->
+    <div style="position:absolute;top:80px;left:24px;width:40px;height:40px;border-top:1px solid ${C}44;border-left:1px solid ${C}44;pointer-events:none;"></div>
+    <div style="position:absolute;bottom:24px;right:24px;width:40px;height:40px;border-bottom:1px solid ${C}44;border-right:1px solid ${C}44;pointer-events:none;"></div>
+
+    <div class="z-inner" style="width:100%;position:relative;z-index:1;padding-top:3rem;padding-bottom:3rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;" id="z-hero-grid">
+
+        <!-- LEFT: copy -->
         <div>
-          <div class="fade-up" style="display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.22);border-radius:30px;padding:8px 18px;margin-bottom:1.75rem;">
-            <span style="width:7px;height:7px;background:${C};border-radius:50%;animation:blink 2s infinite;flex-shrink:0;"></span>
-            <span style="font-size:11px;font-weight:800;letter-spacing:1.5px;color:${C};text-transform:uppercase;">AI Predictive Intelligence · BNB Chain</span>
+          <!-- Eyebrow -->
+          <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:1.75rem;animation:z-glow-in 0.5s ease forwards;">
+            <span style="width:6px;height:6px;background:${C};display:block;animation:z-signal-pulse 2s infinite;"></span>
+            <span style="font-family:var(--z-mono);font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:${C};">LIVE — AI Predictive Intelligence · BNB Chain</span>
           </div>
-          <h1 class="fade-up" style="font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:900;font-family:'Manrope',sans-serif;line-height:1.07;letter-spacing:-2px;margin-bottom:1.5rem;animation-delay:0.1s;">
-            Turn Signal<br/><span class="gradient-text">Into Strategy.</span>
+
+          <!-- H1 -->
+          <h1 class="z-h1" style="margin-bottom:1.5rem;animation:z-glow-in 0.6s ease 0.1s both;">
+            <span class="z-strike">react</span>to signals.<br/>
+            <span style="color:${C};text-shadow:0 0 30px ${C}66;">predict</span> outcomes.
           </h1>
-          <p class="fade-up" style="font-size:clamp(1rem,1.8vw,1.15rem);color:var(--text-muted);line-height:1.85;margin-bottom:2.25rem;max-width:500px;animation-delay:0.2s;">
-            ${PROJECT.name} identifies meaningful trends before they become obvious.
-            Intelligence is no longer reactive — <strong style="color:var(--text);">it's anticipatory.</strong>
+
+          <p style="font-size:1rem;color:var(--z-muted);line-height:1.85;margin-bottom:2rem;max-width:480px;animation:z-glow-in 0.6s ease 0.2s both;font-family:var(--z-body);">
+            ZentarAI processes 500+ on-chain and off-chain data streams through proprietary ML models — surfacing decisive intelligence before it becomes market consensus.
           </p>
-          <div class="fade-up" style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2.75rem;animation-delay:0.3s;">
-            <a href="/#how-it-works" class="btn-primary" style="font-size:0.95rem;"><i class="fas fa-rocket"></i> Get Started</a>
-            <a href="/whitepaper" class="btn-outline" style="font-size:0.95rem;"><i class="fas fa-file-alt"></i> Whitepaper</a>
-            <a href="/login" class="btn-ghost" style="font-size:0.9rem;"><i class="fas fa-wallet"></i> Connect</a>
+
+          <!-- Buttons -->
+          <div style="display:flex;gap:0.875rem;flex-wrap:wrap;margin-bottom:2.5rem;animation:z-glow-in 0.6s ease 0.3s both;">
+            <a href="/#signal" class="z-btn"><i class="fas fa-terminal" style="font-size:0.7rem;"></i> explore_signal</a>
+            <a href="/whitepaper" class="z-btn-outline"><i class="fas fa-book" style="font-size:0.7rem;"></i> read_docs</a>
+            <a href="/login" class="z-btn-ghost"><i class="fas fa-wallet" style="font-size:0.7rem;"></i> connect</a>
           </div>
-          <!-- Stats row -->
-          <div class="fade-up" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;animation-delay:0.4s;">
+
+          <!-- Stat row — terminal style -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(16,185,129,0.12);animation:z-glow-in 0.6s ease 0.4s both;">
             ${[
-              ['10B', 'ZNTR Total Supply', C],
-              ['Q2 2026', 'TGE & DEX Listing', CL],
-              ['BNB', 'BEP-20 Verified', '#f3ba2f'],
-            ].map(([v, l, col]) => `
-            <div style="border-left:2px solid ${col};padding-left:14px;">
-              <div style="font-size:1.6rem;font-weight:900;font-family:'Manrope',sans-serif;color:${col};">${v}</div>
-              <div style="font-size:0.72rem;color:var(--text-muted);margin-top:3px;">${l}</div>
+              {v:'10B', l:'ZNTR Supply', c:C},
+              {v:'Q2 2026', l:'TGE Target', c:CL},
+              {v:'BEP-20', l:'BNB Chain', c:'#f3ba2f'},
+            ].map((s,i) => `
+            <div style="padding:1rem;${i<2?'border-right:1px solid rgba(16,185,129,0.12);':''}">
+              <div style="font-family:var(--z-mono);font-size:1.3rem;font-weight:700;color:${s.c};letter-spacing:-1px;">${s.v}</div>
+              <div style="font-family:var(--z-mono);font-size:0.63rem;color:var(--z-dim);margin-top:3px;letter-spacing:1px;text-transform:uppercase;">${s.l}</div>
             </div>`).join('')}
           </div>
         </div>
 
-        <!-- Right: Live Signal Card -->
-        <div class="float-anim" style="position:relative;display:flex;justify-content:center;">
-          <div class="glass-card card-glow" style="width:100%;max-width:420px;padding:1.75rem;background:linear-gradient(145deg,rgba(10,18,24,0.95),rgba(6,12,16,0.98));border:1px solid rgba(16,185,129,0.18);border-radius:1.5rem;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
-              <div style="display:flex;align-items:center;gap:10px;">
-                <div style="width:40px;height:40px;background:linear-gradient(135deg,${C},${CD});border-radius:11px;display:flex;align-items:center;justify-content:center;">
-                  <i class="fas fa-brain" style="color:white;font-size:15px;"></i>
-                </div>
-                <div>
-                  <div style="font-size:13px;font-weight:800;color:white;">AI Signal Engine</div>
-                  <div style="font-size:11px;color:var(--text-muted);">Real-time Intelligence</div>
-                </div>
+        <!-- RIGHT: Live signal terminal demo -->
+        <div class="z-reveal-r" style="position:relative;" id="z-hero-right">
+          <!-- Main terminal panel -->
+          <div style="background:var(--z-bg1);border:1px solid rgba(16,185,129,0.2);position:relative;overflow:hidden;">
+            <!-- Terminal top bar -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;background:rgba(16,185,129,0.06);border-bottom:1px solid rgba(16,185,129,0.12);">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:8px;height:8px;background:#ef4444;"></div>
+                <div style="width:8px;height:8px;background:#fbbf24;"></div>
+                <div style="width:8px;height:8px;background:${C};animation:z-blink 2s infinite;"></div>
               </div>
-              <span class="badge badge-green"><span style="width:5px;height:5px;background:${C};border-radius:50%;animation:blink 1.5s infinite;display:inline-block;"></span> LIVE</span>
+              <span style="font-family:var(--z-mono);font-size:0.65rem;color:var(--z-muted);">zentarai://signal-engine/live</span>
+              <span class="z-badge z-badge-live"><span style="width:4px;height:4px;background:${C};display:inline-block;animation:z-signal-pulse 1.5s infinite;"></span>LIVE</span>
             </div>
-            <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:1.25rem;">
+
+            <!-- Signal feed body -->
+            <div style="padding:0.75rem;display:flex;flex-direction:column;gap:0;" id="z-signal-feed">
+              <!-- Dynamic live feed (z-live-feed injected by JS) -->
+              <div id="z-live-feed" style="display:flex;flex-direction:column;gap:0;min-height:160px;"></div>
+
+              <!-- Live typing cursor line -->
+              <div style="display:flex;align-items:center;gap:8px;padding:7px 12px;background:${C}08;border-left:2px solid ${C};margin-top:1px;">
+                <span style="font-family:var(--z-mono);font-size:0.68rem;color:${C};">$</span>
+                <span id="z-typing" style="font-family:var(--z-mono);font-size:0.68rem;color:var(--z-muted);"></span>
+                <span style="width:6px;height:12px;background:${C};animation:z-blink 1s infinite;display:inline-block;"></span>
+              </div>
+            </div>
+
+            <!-- Bottom metrics bar -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(16,185,129,0.1);">
               ${[
-                ['Whale accumulation detected', 'BNB Chain on-chain signal', C, '2s'],
-                ['Predictive alert: Trend shift', 'AI pattern recognition', '#fbbf24', '8s'],
-                ['Community sentiment: 82%↑', 'Social signal aggregation', '#8b5cf6', '15s'],
-                ['Cross-chain flow anomaly', 'Ecosystem intelligence', CL, '31s'],
-                ['ZNTR staking signal detected', 'Protocol intelligence', '#f97316', '1m'],
-              ].map(([title, desc, col, t]) => `
-              <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:9px;padding:9px 12px;">
-                <div style="width:6px;height:6px;background:${col};border-radius:50%;flex-shrink:0;"></div>
-                <div style="flex:1;min-width:0;">
-                  <div style="font-size:12px;color:var(--text);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${title}</div>
-                  <div style="font-size:10px;color:var(--text-muted);">${desc}</div>
-                </div>
-                <span style="font-size:10px;color:var(--text-dim);white-space:nowrap;">${t} ago</span>
+                {l:'DATA_SOURCES', v:'500+'},
+                {l:'LATENCY', v:'<1s'},
+                {l:'UPTIME', v:'99.9%'},
+              ].map((m,i) => `
+              <div style="padding:0.625rem;text-align:center;${i<2?'border-right:1px solid rgba(16,185,129,0.08);':''}">
+                <div style="font-family:var(--z-mono);font-size:0.82rem;font-weight:700;color:${C};">${m.v}</div>
+                <div style="font-family:var(--z-mono);font-size:0.55rem;color:var(--z-dim);letter-spacing:1px;">${m.l}</div>
               </div>`).join('')}
             </div>
-            <div style="display:flex;align-items:center;gap:8px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);border-radius:9px;padding:10px 14px;">
-              <i class="fas fa-network-wired" style="color:${C};font-size:12px;"></i>
-              <span style="font-size:11px;color:var(--text-muted);">500+ data sources · Sub-second latency</span>
+          </div>
+
+          <!-- Floating info chips -->
+          <div style="position:absolute;top:-14px;right:-12px;background:var(--z-bg1);border:1px solid rgba(251,191,36,0.35);padding:6px 12px;display:flex;align-items:center;gap:8px;">
+            <i class="fas fa-link" style="color:#f3ba2f;font-size:0.7rem;"></i>
+            <div>
+              <div style="font-family:var(--z-mono);font-size:0.68rem;font-weight:700;color:white;">BNB Chain</div>
+              <div style="font-family:var(--z-mono);font-size:0.6rem;color:var(--z-muted);">Chain ID: 56</div>
             </div>
           </div>
-          <!-- Floating badges -->
-          <div class="glass-card" style="position:absolute;top:-16px;right:-14px;padding:9px 14px;display:flex;align-items:center;gap:8px;border-radius:12px;border:1px solid rgba(16,185,129,0.25);">
-            <i class="fas fa-shield-alt" style="color:${C};font-size:12px;"></i>
-            <div><div style="font-size:11px;font-weight:700;color:white;">CertiK Audited</div><div style="font-size:10px;color:var(--text-muted);">Security Verified</div></div>
+          <div style="position:absolute;bottom:-14px;left:-12px;background:var(--z-bg1);border:1px solid ${C}35;padding:6px 12px;display:flex;align-items:center;gap:8px;">
+            <i class="fas fa-shield-alt" style="color:${C};font-size:0.7rem;"></i>
+            <div>
+              <div style="font-family:var(--z-mono);font-size:0.68rem;font-weight:700;color:white;">CertiK Audit</div>
+              <div style="font-family:var(--z-mono);font-size:0.6rem;color:var(--z-muted);">Pre-TGE Planned</div>
+            </div>
           </div>
-          <div class="glass-card" style="position:absolute;bottom:-14px;left:-14px;padding:9px 14px;display:flex;align-items:center;gap:8px;border-radius:12px;border:1px solid rgba(251,191,36,0.25);">
-            <i class="fas fa-link" style="color:#f3ba2f;font-size:12px;"></i>
-            <div><div style="font-size:11px;font-weight:700;color:white;">BNB Chain</div><div style="font-size:10px;color:var(--text-muted);">BEP-20 Native</div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- typing animation script (hero) -->
+  <script>
+  (function(){
+    const lines = [
+      'scanning whale_wallets --chain=BSC --threshold=1M',
+      'running sentiment_fusion --sources=14 --mode=realtime',
+      'pattern_match --model=v3.2 --confidence=0.89',
+      'alert: anomaly_detected --protocol=pancakeswap --severity=medium',
+    ];
+    let li=0, ci=0;
+    const el = document.getElementById('z-typing');
+    if(!el) return;
+    function type(){
+      if(ci<lines[li].length){ el.textContent+=lines[li][ci++]; setTimeout(type,38); }
+      else { setTimeout(erase,2000); }
+    }
+    function erase(){
+      if(ci>0){ el.textContent=lines[li].slice(0,--ci); setTimeout(erase,18); }
+      else { li=(li+1)%lines.length; setTimeout(type,500); }
+    }
+    setTimeout(type, 1800);
+  })();
+  </script>`
+
+  /* ══════════════════════════════════════
+     SIGNAL METRICS BAR
+  ══════════════════════════════════════ */
+  const metricsBar = `
+  <div style="padding:1.25rem 0;background:${C}06;border-top:1px solid ${C}12;border-bottom:1px solid ${C}12;position:relative;overflow:hidden;">
+    <!-- Animated scan line -->
+    <div style="position:absolute;top:0;left:-100%;width:40%;height:100%;background:linear-gradient(90deg,transparent,${C}08,transparent);animation:z-shimmer 4s linear infinite;pointer-events:none;"></div>
+    <div class="z-inner">
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:0;text-align:center;" id="z-metrics-bar">
+        ${[
+          {icon:'fas fa-satellite-dish', v:'500+', l:'data_sources',   target:500, suffix:'+'},
+          {icon:'fas fa-bolt',            v:'<1s',  l:'signal_latency', target:0,  suffix:''},
+          {icon:'fas fa-brain',           v:'3yr',  l:'training_data',  target:3,  suffix:'yr'},
+          {icon:'fas fa-coins',           v:'10B',  l:'zntr_supply',    target:10, suffix:'B'},
+          {icon:'fas fa-vote-yea',        v:'DAO',  l:'governance_2027',target:0,  suffix:''},
+          {icon:'fas fa-link',            v:'BEP-20', l:'bnb_chain',    target:0,  suffix:''},
+        ].map((s,i) => `
+        <div class="z-reveal" style="padding:0.875rem;${i<5?'border-right:1px solid rgba(255,255,255,0.04);':''}display:flex;flex-direction:column;align-items:center;gap:4px;animation-delay:${i*0.08}s;transition:background 0.2s;" onmouseover="this.style.background='rgba(16,185,129,0.06)'" onmouseout="this.style.background='transparent'">
+          <i class="${s.icon}" style="font-size:0.95rem;color:${C};margin-bottom:2px;animation:z-float ${3+i*0.5}s ease-in-out infinite;"></i>
+          <div style="font-family:var(--z-mono);font-size:0.82rem;font-weight:700;color:white;"${s.target>0?` data-target="${s.target}" data-suffix="${s.suffix}"`:''}>
+            ${s.v}
+          </div>
+          <div style="font-family:var(--z-mono);font-size:0.58rem;color:var(--z-dim);letter-spacing:1px;">${s.l}</div>
+          <!-- mini waveform -->
+          <div style="display:flex;align-items:flex-end;gap:2px;height:10px;margin-top:2px;">
+            ${[0.4,0.8,0.6,1.0,0.5,0.9,0.3].map((h,wi) => `<div style="width:2px;background:${C}55;border-radius:1px;height:${Math.floor(h*10)}px;animation:z-wave ${0.6+wi*0.1}s ease-in-out infinite;animation-delay:${wi*0.07}s;"></div>`).join('')}
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>`
+
+  /* ══════════════════════════════════════
+     INTERACTIVE DEMO SECTION
+     (wallet 연결 없이 시스템 시연)
+  ══════════════════════════════════════ */
+  const demo = `
+  <div class="z-hr"></div>
+  <section id="signal" class="z-section" style="position:relative;overflow:hidden;">
+    <div class="z-dot-bg" style="position:absolute;inset:0;opacity:0.2;pointer-events:none;"></div>
+    <div class="z-inner" style="position:relative;z-index:1;">
+
+      <!-- Section header -->
+      <div style="margin-bottom:3.5rem;" class="z-reveal">
+        <div class="z-eyebrow">signal engine demo</div>
+        <h2 class="z-h2" style="margin-bottom:0.875rem;">
+          watch intelligence<br/><span style="color:${C};">process in real-time.</span>
+        </h2>
+        <p style="font-size:0.95rem;color:var(--z-muted);max-width:540px;line-height:1.85;font-family:var(--z-body);">
+          No wallet required. This is how ZentarAI transforms raw blockchain noise into structured, actionable signal — <em style="color:white;font-style:normal;">before any human analyst can react.</em>
+        </p>
+      </div>
+
+      <!-- Demo grid: pipeline visualization -->
+      <div style="display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;gap:0;margin-bottom:3rem;" class="z-reveal" id="z-pipeline">
+
+        <!-- Step 1: Input -->
+        <div style="padding:1.75rem 1.5rem;">
+          <div style="font-family:var(--z-mono);font-size:0.6rem;color:${C};letter-spacing:2px;margin-bottom:1rem;">// INPUT_LAYER</div>
+          <h3 style="font-family:var(--z-sans);font-size:1rem;font-weight:700;color:white;margin-bottom:1rem;">Raw Data Ingestion</h3>
+          <div style="display:flex;flex-direction:column;gap:6px;" id="z-demo-inputs">
+            ${[
+              {src:'BSC mempool', bytes:'2.4MB/s', c:C},
+              {src:'Twitter/X sentiment', bytes:'8.1k posts/min', c:CL},
+              {src:'DEX order flow', bytes:'12.3k tx/s', c:'#8b5cf6'},
+              {src:'Whale tracker', bytes:'247 wallets', c:'#fbbf24'},
+              {src:'Protocol TVL feeds', bytes:'38 protocols', c:'#f97316'},
+            ].map(d => `
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:${d.c}08;border-left:2px solid ${d.c}55;">
+              <span style="font-family:var(--z-mono);font-size:0.68rem;color:var(--z-muted);">${d.src}</span>
+              <span style="font-family:var(--z-mono);font-size:0.62rem;color:${d.c};">${d.bytes}</span>
+            </div>`).join('')}
+          </div>
+        </div>
+
+        <!-- Divider line with flow arrows -->
+        <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:0 0.5rem;">
+          ${Array(5).fill(0).map((_,i) => `
+          <i class="fas fa-chevron-right" style="color:${C}55;font-size:0.6rem;animation:z-glow-in 0.3s ease ${i*0.15}s both;"></i>`).join('')}
+        </div>
+
+        <!-- Step 2: Processing -->
+        <div style="padding:1.75rem 1.5rem;background:${C}05;border-top:1px solid ${C}18;border-bottom:1px solid ${C}18;">
+          <div style="font-family:var(--z-mono);font-size:0.6rem;color:${CL};letter-spacing:2px;margin-bottom:1rem;">// ML_PROCESSING</div>
+          <h3 style="font-family:var(--z-sans);font-size:1rem;font-weight:700;color:white;margin-bottom:1rem;">Pattern Recognition</h3>
+          <!-- Animated progress bars -->
+          <div style="display:flex;flex-direction:column;gap:8px;" id="z-demo-proc">
+            ${[
+              {model:'anomaly_detect', pct:89, c:C},
+              {model:'sentiment_fusion', pct:76, c:CL},
+              {model:'price_forecast', pct:94, c:'#8b5cf6'},
+              {model:'whale_classify', pct:83, c:'#fbbf24'},
+              {model:'trend_pattern', pct:91, c:'#f97316'},
+            ].map(m => `
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="font-family:var(--z-mono);font-size:0.65rem;color:var(--z-muted);">${m.model}</span>
+                <span style="font-family:var(--z-mono);font-size:0.65rem;color:${m.c};">${m.pct}%</span>
+              </div>
+              <div class="z-prog-track">
+                <div class="z-prog-fill" data-w="${m.pct}" style="background:${m.c};"></div>
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:0 0.5rem;">
+          ${Array(5).fill(0).map((_,i) => `
+          <i class="fas fa-chevron-right" style="color:${C}55;font-size:0.6rem;animation:z-glow-in 0.3s ease ${i*0.15}s both;"></i>`).join('')}
+        </div>
+
+        <!-- Step 3: Output signals -->
+        <div style="padding:1.75rem 1.5rem;">
+          <div style="font-family:var(--z-mono);font-size:0.6rem;color:#fbbf24;letter-spacing:2px;margin-bottom:1rem;">// SIGNAL_OUTPUT</div>
+          <h3 style="font-family:var(--z-sans);font-size:1rem;font-weight:700;color:white;margin-bottom:1rem;">Actionable Intelligence</h3>
+          <div style="display:flex;flex-direction:column;gap:6px;" id="z-demo-output">
+            ${[
+              {sig:'ACCUMULATE_SIGNAL', conf:'HIGH', c:C},
+              {sig:'SENTIMENT_BULL',    conf:'MED',  c:CL},
+              {sig:'WHALE_MOVE_ALERT',  conf:'HIGH', c:'#ef4444'},
+              {sig:'TVL_ANOMALY',       conf:'LOW',  c:'#fbbf24'},
+              {sig:'TREND_REVERSAL',    conf:'MED',  c:'#8b5cf6'},
+            ].map(o => `
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:${o.c}08;border-right:2px solid ${o.c}55;">
+              <span style="font-family:var(--z-mono);font-size:0.68rem;color:${o.c};">${o.sig}</span>
+              <span class="z-badge" style="color:${o.c};border-color:${o.c}44;background:${o.c}0e;">${o.conf}</span>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo CTA bar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;padding:1.5rem;background:${C}07;border:1px solid ${C}20;" class="z-reveal">
+        <div>
+          <div style="font-family:var(--z-mono);font-size:0.7rem;color:${C};margin-bottom:4px;">// DEMO_NOTE</div>
+          <p style="font-size:0.875rem;color:var(--z-muted);font-family:var(--z-body);">
+            This is a live simulation of the ZentarAI signal pipeline. Connect your wallet at TGE to access real signal feeds, premium tiers, and DAO participation.
+          </p>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-shrink:0;">
+          <a href="/whitepaper" class="z-btn-outline" style="font-size:0.72rem;padding:0.6rem 1.2rem;"><i class="fas fa-book" style="font-size:0.65rem;"></i> read_whitepaper</a>
+          <a href="/login" class="z-btn" style="font-size:0.72rem;padding:0.6rem 1.2rem;"><i class="fas fa-terminal" style="font-size:0.65rem;"></i> init_wallet</a>
+        </div>
+      </div>
+    </div>
+  </section>`
+
+  /* ══════════════════════════════════════
+     ARCHITECTURE (replaces "How It Works")
+  ══════════════════════════════════════ */
+  const architecture = `
+  <div class="z-hr"></div>
+  <section id="architecture" class="z-section">
+    <div class="z-inner">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;" id="z-arch-grid">
+
+        <!-- Left: description stack -->
+        <div class="z-reveal-l">
+          <div class="z-eyebrow">system architecture</div>
+          <h2 class="z-h2" style="margin-bottom:1.25rem;">
+            three-layer<br/><span style="color:${C};">signal topology.</span>
+          </h2>
+          <p style="font-size:0.95rem;color:var(--z-muted);line-height:1.9;margin-bottom:2rem;font-family:var(--z-body);">
+            Unlike reactive analytics tools, ZentarAI operates across three distinct intelligence layers — each feeding the next with increasing signal confidence.
+          </p>
+
+          <!-- Timeline steps -->
+          <div style="display:flex;flex-direction:column;gap:0;position:relative;">
+            <div style="position:absolute;left:15px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,${C},${CL},${C}44);"></div>
+            ${[
+              {n:'L1', title:'Data Aggregation Layer', desc:'500+ real-time streams: on-chain events, wallet flows, social sentiment, and DeFi protocol metrics — normalized into a unified data bus.', c:C},
+              {n:'L2', title:'ML Signal Layer',        desc:'Proprietary models trained on 3+ years of blockchain behavioral data. Anomaly detection, sentiment fusion, and pattern libraries updated continuously.', c:CL},
+              {n:'L3', title:'Intelligence Delivery',  desc:'Processed signals delivered sub-second to the ZentarAI dashboard, Signal API v1, and DAO strategy feeds — ahead of visible market movements.', c:'#fbbf24'},
+            ].map((s,i) => `
+            <div style="display:flex;gap:1.5rem;padding:1.25rem 0;padding-left:2.5rem;position:relative;animation:z-glow-in 0.5s ease ${i*0.15}s both;">
+              <div style="position:absolute;left:9px;top:1.5rem;width:12px;height:12px;background:${s.c};border:2px solid var(--z-bg);"></div>
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+                  <span style="font-family:var(--z-mono);font-size:0.65rem;color:${s.c};letter-spacing:1px;">[${s.n}]</span>
+                  <span style="font-family:var(--z-sans);font-size:0.95rem;font-weight:600;color:white;">${s.title}</span>
+                </div>
+                <p style="font-size:0.82rem;color:var(--z-muted);line-height:1.75;font-family:var(--z-body);">${s.desc}</p>
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+
+        <!-- Right: capability cards -->
+        <div class="z-reveal-r" style="display:flex;flex-direction:column;gap:0.875rem;">
+          ${[
+            {icon:'fas fa-satellite-dish', c:C,         title:'Real-Time Data Bus',       desc:'Ingests blockchain events, wallet signals, and social feeds with sub-second normalization across 500+ sources.', tags:['On-chain','Social','DEX flows']},
+            {icon:'fas fa-brain',          c:CL,        title:'Adversarial ML Engine',    desc:'Six proprietary models run in parallel — anomaly detection, sentiment fusion, whale classification, and trend forecasting.', tags:['Anomaly','Sentiment','Forecast']},
+            {icon:'fas fa-bolt',           c:'#fbbf24', title:'Signal Delivery API',      desc:'RESTful Signal API v1 exposes processed intelligence to DAOs, protocols, and builders with webhook alert support.', tags:['REST API','Webhooks','DAO feeds']},
+            {icon:'fas fa-shield-alt',     c:'#22c55e', title:'Verified Smart Contracts', desc:'All ZNTR contracts source-verified on BSCScan. CertiK audit planned pre-TGE Q2 2026. Open-source repository.', tags:['CertiK','BSCScan','Open-source']},
+          ].map((f,i) => `
+          <div class="z-card" style="padding:1.25rem 1.5rem;display:flex;gap:1rem;animation:z-glow-in 0.5s ease ${i*0.1}s both;">
+            <div style="width:42px;height:42px;background:${f.c}12;border:1px solid ${f.c}25;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="${f.icon}" style="color:${f.c};font-size:1rem;"></i>
+            </div>
+            <div style="flex:1;min-width:0;">
+              <h4 style="font-family:var(--z-sans);font-size:0.9rem;font-weight:600;color:white;margin-bottom:4px;">${f.title}</h4>
+              <p style="font-size:0.78rem;color:var(--z-muted);line-height:1.7;margin-bottom:8px;font-family:var(--z-body);">${f.desc}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                ${f.tags.map(t => `<span style="font-family:var(--z-mono);font-size:0.6rem;letter-spacing:0.5px;padding:2px 8px;border:1px solid rgba(255,255,255,0.08);color:var(--z-muted);">${t}</span>`).join('')}
+              </div>
+            </div>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>
+  </section>`
+
+  /* ══════════════════════════════════════
+     TOKEN SECTION (replaces "Tokenomics")
+  ══════════════════════════════════════ */
+  const token = `
+  <div class="z-hr"></div>
+  <section id="token" class="z-section" style="position:relative;overflow:hidden;">
+    <div class="z-grid-bg" style="position:absolute;inset:0;opacity:0.4;pointer-events:none;"></div>
+    <div class="z-inner" style="position:relative;z-index:1;">
+      <div style="text-align:center;max-width:560px;margin:0 auto 3.5rem;" class="z-reveal">
+        <div class="z-eyebrow">token architecture</div>
+        <h2 class="z-h2" style="margin-bottom:0.875rem;">
+          utility drives<br/><span style="color:${C};">the flywheel.</span>
+        </h2>
+        <p style="font-size:0.92rem;color:var(--z-muted);line-height:1.85;font-family:var(--z-body);">ZNTR is not a speculative asset — it's the access layer, governance key, and value capture mechanism for the ZentarAI intelligence network.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;" id="z-token-grid">
+        <!-- Left: key metrics -->
+        <div class="z-reveal-l">
+          <!-- Token identity block -->
+          <div style="border:1px solid ${C}22;margin-bottom:1.5rem;overflow:hidden;">
+            <div style="background:${C}08;padding:0.75rem 1rem;border-bottom:1px solid ${C}18;">
+              <span style="font-family:var(--z-mono);font-size:0.62rem;color:${C};letter-spacing:2px;">// ZNTR_TOKEN_SPEC</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+              ${[
+                {k:'TOKEN_NAME',  v:'ZentarAI'},
+                {k:'TICKER',      v:'ZNTR'},
+                {k:'TOTAL_SUPPLY',v:'10,000,000,000'},
+                {k:'NETWORK',     v:'BNB Chain'},
+                {k:'STANDARD',    v:'BEP-20'},
+                {k:'TGE_DATE',    v:'Q2 2026'},
+              ].map((r,i) => `
+              <div style="padding:0.75rem 1rem;${i%2===0?'border-right:1px solid rgba(16,185,129,0.08);':''}${i<4?'border-bottom:1px solid rgba(16,185,129,0.08);':''}">
+                <div style="font-family:var(--z-mono);font-size:0.58rem;color:var(--z-dim);letter-spacing:1px;margin-bottom:3px;">${r.k}</div>
+                <div style="font-family:var(--z-mono);font-size:0.82rem;font-weight:700;color:white;">${r.v}</div>
+              </div>`).join('')}
+            </div>
+          </div>
+
+          <!-- Allocation bars -->
+          <div style="font-family:var(--z-mono);font-size:0.62rem;color:var(--z-dim);letter-spacing:2px;margin-bottom:0.875rem;">// ALLOCATION_MATRIX</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            ${[
+              {cat:'Ecosystem Rewards', pct:40, c:C,         amt:'4.0B'},
+              {cat:'Team & Advisors',   pct:15, c:CL,        amt:'1.5B'},
+              {cat:'Partnerships',      pct:15, c:'#8b5cf6', amt:'1.5B'},
+              {cat:'Private Sale',      pct:15, c:'#fbbf24', amt:'1.5B'},
+              {cat:'Protocol Reserve',  pct:10, c:'#f97316', amt:'1.0B'},
+              {cat:'Public Sale',       pct:5,  c:'#22c55e', amt:'0.5B'},
+            ].map(a => `
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <div style="width:7px;height:7px;background:${a.c};"></div>
+                  <span style="font-size:0.8rem;color:var(--z-txt);font-family:var(--z-body);">${a.cat}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-family:var(--z-mono);font-size:0.72rem;color:var(--z-muted);">${a.amt}</span>
+                  <span style="font-family:var(--z-mono);font-size:0.82rem;font-weight:700;color:${a.c};">${a.pct}%</span>
+                </div>
+              </div>
+              <div class="z-prog-track">
+                <div class="z-prog-fill" data-w="${a.pct}" style="background:${a.c};"></div>
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+
+        <!-- Right: chart + vesting -->
+        <div class="z-reveal-r" style="display:flex;flex-direction:column;gap:1.25rem;">
+          <!-- Donut chart -->
+          <div style="border:1px solid rgba(16,185,129,0.12);padding:1.75rem;text-align:center;">
+            <div style="position:relative;display:inline-block;">
+              <canvas id="tokenomicsChart" width="240" height="240"></canvas>
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+                <div style="font-family:var(--z-mono);font-size:1.4rem;font-weight:700;color:${C};">10B</div>
+                <div style="font-family:var(--z-mono);font-size:0.58rem;color:var(--z-dim);letter-spacing:1px;">ZNTR</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vesting table -->
+          <div style="border:1px solid rgba(16,185,129,0.1);overflow:hidden;">
+            <div style="background:${C}06;padding:0.625rem 1rem;border-bottom:1px solid rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-family:var(--z-mono);font-size:0.6rem;color:${C};letter-spacing:2px;">// VESTING_SCHEDULE</span>
+              <a href="/vesting" style="font-family:var(--z-mono);font-size:0.6rem;color:var(--z-muted);text-decoration:none;letter-spacing:0.5px;" onmouseover="this.style.color='${C}'" onmouseout="this.style.color='var(--z-muted)'">full_details →</a>
+            </div>
+            <table style="width:100%;border-collapse:collapse;font-size:0.75rem;">
+              <thead>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <th style="text-align:left;padding:7px 12px;font-family:var(--z-mono);font-size:0.58rem;color:var(--z-dim);letter-spacing:1px;font-weight:400;">CATEGORY</th>
+                  <th style="text-align:center;padding:7px 8px;font-family:var(--z-mono);font-size:0.58rem;color:var(--z-dim);letter-spacing:1px;font-weight:400;">CLIFF</th>
+                  <th style="text-align:center;padding:7px 8px;font-family:var(--z-mono);font-size:0.58rem;color:var(--z-dim);letter-spacing:1px;font-weight:400;">VEST</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${[
+                  {cat:'Ecosystem', col:C,         cliff:'—',     vest:'36 mo'},
+                  {cat:'Team',      col:CL,        cliff:'12 mo', vest:'36 mo'},
+                  {cat:'Partners',  col:'#8b5cf6', cliff:'3 mo',  vest:'30 mo'},
+                  {cat:'Private',   col:'#fbbf24', cliff:'6 mo',  vest:'18 mo'},
+                  {cat:'Reserve',   col:'#f97316', cliff:'—',     vest:'48 mo'},
+                  {cat:'Public',    col:'#22c55e', cliff:'—',     vest:'TGE'},
+                ].map(r => `
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.03);">
+                  <td style="padding:7px 12px;"><div style="display:flex;align-items:center;gap:7px;"><div style="width:6px;height:6px;background:${r.col};"></div><span style="font-family:var(--z-sans);font-size:0.78rem;color:var(--z-txt);">${r.cat}</span></div></td>
+                  <td style="text-align:center;padding:7px 8px;font-family:var(--z-mono);font-size:0.72rem;color:var(--z-muted);">${r.cliff}</td>
+                  <td style="text-align:center;padding:7px 8px;font-family:var(--z-mono);font-size:0.72rem;color:${r.col};font-weight:700;">${r.vest}</td>
+                </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 60mo release chart -->
+          <div style="border:1px solid rgba(16,185,129,0.1);padding:1rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.875rem;flex-wrap:wrap;gap:0.5rem;">
+              <span style="font-family:var(--z-mono);font-size:0.6rem;color:${C};letter-spacing:1.5px;">// 60_MONTH_RELEASE</span>
+              <div style="display:flex;gap:1rem;">
+                ${[{mo:'M12',v:'33%',c:CL},{mo:'M36',v:'79%',c:'#fbbf24'},{mo:'M48',v:'100%',c:'#f97316'}].map(m=>`
+                <div style="text-align:center;"><div style="font-family:var(--z-mono);font-size:0.7rem;font-weight:700;color:${m.c};">${m.v}</div><div style="font-family:var(--z-mono);font-size:0.55rem;color:var(--z-dim);">${m.mo}</div></div>`).join('')}
+              </div>
+            </div>
+            <canvas id="vestingChart" height="70"></canvas>
           </div>
         </div>
       </div>
     </div>
   </section>`
 
-  /* ── TRUST BAR ── */
-  const trustBar = `
-  <section style="padding:1.5rem 0;background:rgba(16,185,129,0.04);border-top:1px solid rgba(16,185,129,0.1);border-bottom:1px solid rgba(16,185,129,0.1);">
-    <div class="section-inner">
-      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:0;text-align:center;" id="trust-bar">
-        ${[
-          {icon:'fas fa-brain', val:'AI Engine', label:'On-Chain Signals'},
-          {icon:'fas fa-chart-line', val:'Predictive', label:'Analytics Layer'},
-          {icon:'fas fa-network-wired', val:'500+', label:'Data Sources'},
-          {icon:'fas fa-coins', val:'10B', label:'ZNTR Supply'},
-          {icon:'fas fa-vote-yea', val:'DAO', label:'Governance 2027'},
-          {icon:'fas fa-link', val:'BEP-20', label:'BNB Chain Native'},
-        ].map((s, i) => `
-        <div style="padding:1rem;${i<5?'border-right:1px solid rgba(255,255,255,0.05);':''}display:flex;flex-direction:column;align-items:center;gap:4px;">
-          <i class="${s.icon}" style="font-size:1.1rem;color:${C};margin-bottom:2px;"></i>
-          <div style="font-size:0.9rem;font-weight:800;color:white;">${s.val}</div>
-          <div style="font-size:0.7rem;color:var(--text-muted);">${s.label}</div>
-        </div>`).join('')}
+  /* ══════════════════════════════════════
+     NETWORK SECTION (replaces "Ecosystem")
+  ══════════════════════════════════════ */
+  const network = `
+  <div class="z-hr"></div>
+  <section id="network" class="z-section">
+    <div class="z-inner">
+      <div style="text-align:center;max-width:540px;margin:0 auto 3.5rem;" class="z-reveal">
+        <div class="z-eyebrow">intelligence network</div>
+        <h2 class="z-h2" style="margin-bottom:0.875rem;">
+          data compounds.<br/><span style="color:${C};">signals converge.</span>
+        </h2>
+        <p style="font-size:0.92rem;color:var(--z-muted);line-height:1.85;font-family:var(--z-body);">Four interconnected modules form a closed intelligence loop — where each signal improves the next prediction cycle.</p>
       </div>
-    </div>
-  </section>`
 
-  /* ── HOW IT WORKS ── */
-  const howItWorks = `
-  <section id="how-it-works" class="section observe">
-    <div class="section-inner">
-      <div style="text-align:center;max-width:640px;margin:0 auto 3.5rem;">
-        <div class="section-label"><i class="fas fa-play-circle"></i> How It Works</div>
-        <h2 class="section-title">From <span class="gradient-text">Noise to Clarity</span></h2>
-        <p class="section-subtitle" style="margin:0 auto;">ZentarAI transforms overwhelming data streams into decisive intelligence in three steps.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;position:relative;" id="hiw-grid">
-        <div style="position:absolute;top:56px;left:18%;right:18%;height:1px;background:linear-gradient(90deg,transparent,${C},${CL},transparent);opacity:0.25;z-index:0;pointer-events:none;"></div>
+      <!-- 2x2 module grid -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(16,185,129,0.08);margin-bottom:2.5rem;" id="z-network-grid">
         ${[
-          {n:'01', icon:'fas fa-satellite-dish', color:C, title:'Aggregate Signals',
-            desc:'ZentarAI collects and normalizes 500+ real-time on-chain and off-chain data streams — wallet flows, social sentiment, protocol metrics, and market micro-structure.',
-            items:['On-chain event listeners','Social sentiment feeds','Protocol metrics','Whale wallet tracking']},
-          {n:'02', icon:'fas fa-brain', color:CL, title:'AI Pattern Recognition',
-            desc:'Proprietary ML models trained on 3+ years of blockchain data identify repeating structural patterns — surfacing signals before they manifest in price action.',
-            items:['ML anomaly detection','Sentiment-signal fusion','Trend forecasting','Pattern library (3yr data)']},
-          {n:'03', icon:'fas fa-bolt', color:'#fbbf24', title:'Decisive Intelligence',
-            desc:'Processed signals are delivered as actionable intelligence via the ZentarAI dashboard and Signal API — enabling ecosystems to act confidently and ahead of the crowd.',
-            items:['Real-time dashboard','Signal API v1','DAO strategy feeds','Enterprise SDK']},
-        ].map((s, i) => `
-        <div class="glass-card card-glow observe" style="padding:2rem;position:relative;z-index:1;animation-delay:${i*0.12}s;">
-          <div style="width:64px;height:64px;background:${s.color}18;border:2px solid ${s.color}30;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;position:relative;">
-            <i class="${s.icon}" style="font-size:1.5rem;color:${s.color};"></i>
-            <span style="position:absolute;top:-8px;right:-8px;background:var(--bg);border:1px solid rgba(255,255,255,0.1);border-radius:6px;font-size:10px;font-weight:800;color:${s.color};padding:2px 6px;">${s.n}</span>
+          {icon:'fas fa-database', c:C,         title:'Signal Intelligence Platform',
+            code:'SIP_v1.3',
+            desc:'The core engine aggregates on-chain events, wallet behavior, DeFi TVL, and social layers into a normalized intelligence stream — processed every 850ms.',
+            items:['On-chain event indexing','Wallet behavioral clustering','DeFi TVL correlation engine','Social sentiment fusion']},
+          {icon:'fas fa-code',     c:CL,        title:'Signal API & Dev SDK',
+            code:'API_v1.0',
+            desc:'Developer-first REST API exposing processed signals to DAOs, protocols, and builders. Webhook alerts, BNB Chain SDK, and configurable thresholds.',
+            items:['REST API v1 (JSON)','Webhook alert system','BNB Chain SDK','DAO strategy integration']},
+          {icon:'fas fa-users',    c:'#8b5cf6', title:'DAO Governance Protocol',
+            code:'DAO_2027',
+            desc:'ZNTR token holders govern signal parameters, fund allocation, and protocol upgrades through on-chain voting — launching Q1 2027.',
+            items:['On-chain proposal voting','Treasury management','Signal parameter tuning','Protocol upgrade governance']},
+          {icon:'fas fa-coins',    c:'#fbbf24', title:'ZNTR Incentive Loop',
+            code:'ECON_v1',
+            desc:'Platform usage generates staking yield, unlocks premium signal tiers, and accumulates governance weight — forming a self-reinforcing participation flywheel.',
+            items:['Staking yield (APY)','Premium tier unlocks','Governance weighting','Fee burn mechanism']},
+        ].map((m,i) => `
+        <div class="z-reveal" style="background:var(--z-bg);padding:2rem;animation-delay:${i*0.08}s;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:1rem;right:1rem;font-family:var(--z-mono);font-size:0.6rem;color:var(--z-dim);letter-spacing:1px;">${m.code}</div>
+          <div style="width:44px;height:44px;background:${m.c}10;border:1px solid ${m.c}25;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+            <i class="${m.icon}" style="color:${m.c};font-size:1.1rem;"></i>
           </div>
-          <h3 style="font-size:1.1rem;font-weight:800;font-family:'Manrope',sans-serif;color:white;margin-bottom:0.6rem;">${s.title}</h3>
-          <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.1rem;">${s.desc}</p>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
-            ${s.items.map(it => `<li style="display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--text-muted);">
-              <i class="fas fa-check" style="color:${s.color};font-size:9px;"></i>${it}</li>`).join('')}
-          </ul>
-        </div>`).join('')}
-      </div>
-    </div>
-  </section>`
-
-  /* ── FEATURES ── */
-  const features = `
-  <div class="divider"></div>
-  <section id="features" class="section">
-    <div class="section-inner">
-      <div style="max-width:640px;margin-bottom:3.5rem;">
-        <div class="section-label"><i class="fas fa-layer-group"></i> Core Features</div>
-        <h2 class="section-title">Intelligence. <span class="gradient-text">Anticipated.</span></h2>
-        <p class="section-subtitle">Every module of ZentarAI is engineered for one purpose — delivering foresight before the market reacts.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;" id="feat-grid">
-        ${[
-          {icon:'fas fa-brain',color:C,title:'AI Signal Engine',desc:'Real-time pattern recognition across 500+ on-chain and off-chain data sources. Processes signals in under 1 second.',tags:['Pattern Recognition','Sub-1s Latency','500+ Sources']},
-          {icon:'fas fa-chart-line',color:CL,title:'Predictive Analytics',desc:'Forward-looking intelligence built on 3 years of blockchain behavioral data. Identifies trends before they appear.',tags:['3yr Training Data','Trend Forecasting','Proactive Alerts']},
-          {icon:'fas fa-network-wired',color:'#8b5cf6',title:'Ecosystem Intelligence',desc:'Cross-protocol aggregation delivers a holistic view of DeFi, NFT, and social signal layers simultaneously.',tags:['Cross-Protocol','DeFi + Social','Unified Layer']},
-          {icon:'fas fa-bolt',color:'#fbbf24',title:'Real-time Decisioning',desc:'Sub-second signal delivery ensures your strategy is always ahead of visible market movements.',tags:['Real-time Feed','Dashboard View','API Access']},
-          {icon:'fas fa-shield-alt',color:'#22c55e',title:'Verified & Audited',desc:'Smart contracts audited by CertiK. All contracts source-verified and publicly transparent on BSCScan.',tags:['CertiK Audit','BSCScan Verified','Open Source']},
-          {icon:'fas fa-coins',color:'#f97316',title:'ZNTR Token Economy',desc:'Governance voting, staking rewards, and premium signal tier access — all powered by the ZNTR utility token.',tags:['Governance','Staking APY','Premium Tiers']},
-        ].map((f, i) => `
-        <div class="glass-card card-glow observe" style="padding:1.75rem;animation-delay:${i*0.07}s;">
-          <div style="width:48px;height:48px;background:${f.color}18;border:1px solid ${f.color}30;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;">
-            <i class="${f.icon}" style="font-size:1.25rem;color:${f.color};"></i>
-          </div>
-          <h3 style="font-size:1rem;font-weight:800;font-family:'Manrope',sans-serif;margin-bottom:0.6rem;color:white;">${f.title}</h3>
-          <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.75;margin-bottom:1rem;">${f.desc}</p>
-          <div style="display:flex;flex-wrap:wrap;gap:5px;">
-            ${f.tags.map(t => `<span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.05);color:var(--text-muted);border:1px solid rgba(255,255,255,0.07);">${t}</span>`).join('')}
-          </div>
-        </div>`).join('')}
-      </div>
-    </div>
-  </section>`
-
-  /* ── ECOSYSTEM ── */
-  const ecosystem = `
-  <div class="divider"></div>
-  <section id="ecosystem" class="section">
-    <div class="section-inner">
-      <div style="text-align:center;max-width:680px;margin:0 auto 3.5rem;">
-        <div class="section-label"><i class="fas fa-network-wired"></i> Ecosystem</div>
-        <h2 class="section-title">One <span class="gradient-text">Intelligence</span> Loop</h2>
-        <p class="section-subtitle" style="margin:0 auto;">A self-reinforcing cycle where data becomes signal, signal becomes strategy, and strategy drives ecosystem growth.</p>
-      </div>
-      <!-- Flow -->
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:3.5rem;position:relative;" id="eco-flow">
-        <div style="position:absolute;top:46%;left:10%;right:10%;height:1px;background:linear-gradient(90deg,${C},${CL},${C},${CL});opacity:0.18;z-index:0;pointer-events:none;"></div>
-        ${[
-          {n:'01', icon:'fas fa-satellite-dish', color:C, title:'Data Aggregation', desc:'500+ streams collected in real-time'},
-          {n:'02', icon:'fas fa-brain', color:CL, title:'AI Processing', desc:'ML pattern recognition & fusion'},
-          {n:'03', icon:'fas fa-bolt', color:'#fbbf24', title:'Signal Generation', desc:'Actionable intelligence delivered'},
-          {n:'04', icon:'fas fa-chart-line', color:'#8b5cf6', title:'Strategic Action', desc:'Ecosystem acts ahead of the market'},
-        ].map((s, i) => `
-        <div class="observe" style="position:relative;z-index:1;text-align:center;padding:0 1rem;animation-delay:${i*0.1}s;">
-          <div style="width:70px;height:70px;margin:0 auto 1rem;background:linear-gradient(135deg,${s.color}15,${s.color}08);border:2px solid ${s.color}30;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;">
-            <i class="${s.icon}" style="font-size:1.5rem;color:${s.color};"></i>
-            <span style="position:absolute;top:-8px;right:-8px;background:var(--bg);border:1px solid rgba(255,255,255,0.1);border-radius:6px;font-size:10px;font-weight:800;color:${s.color};padding:2px 6px;">${s.n}</span>
-          </div>
-          <h3 style="font-size:0.95rem;font-weight:800;color:white;margin-bottom:6px;">${s.title}</h3>
-          <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;">${s.desc}</p>
-        </div>`).join('')}
-      </div>
-      <!-- Pillars -->
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;" id="eco-pillars">
-        ${[
-          {icon:'fas fa-database', color:C, title:'Signal Intelligence Platform',
-            desc:'The core ZentarAI engine aggregates data from on-chain events, wallet behaviors, DeFi protocol metrics, and social layers into a unified intelligence stream.',
-            items:['On-chain event indexing','Wallet behavioral analysis','DeFi TVL correlation','Social sentiment fusion']},
-          {icon:'fas fa-code', color:CL, title:'Signal API & Developer Tools',
-            desc:'ZentarAI exposes processed intelligence via a developer-friendly REST API, enabling DAOs, protocols, and builders to integrate predictive signals directly.',
-            items:['REST API v1','SDK for BNB Chain','DAO strategy feeds','Webhook alerts']},
-          {icon:'fas fa-users', color:'#8b5cf6', title:'Community & DAO Governance',
-            desc:'ZNTR token holders govern platform development, signal parameters, fund allocation, and network expansion through on-chain voting.',
-            items:['On-chain voting','Treasury management','Signal parameter tuning','Protocol upgrade proposals']},
-          {icon:'fas fa-coins', color:'#fbbf24', title:'ZNTR Token Economy',
-            desc:'A sustainable token economy where platform usage generates staking rewards, premium tier unlocks, and governance influence — creating a flywheel of ecosystem participation.',
-            items:['Staking yield (APY)','Premium signal tiers','Governance weight','Fee burn mechanism']},
-        ].map((p, i) => `
-        <div class="glass-card card-glow observe" style="padding:1.875rem;animation-delay:${i*0.08}s;">
-          <div style="display:flex;align-items:flex-start;gap:1.1rem;margin-bottom:1.25rem;">
-            <div style="width:50px;height:50px;background:${p.color}18;border:1px solid ${p.color}30;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
-              <i class="${p.icon}" style="font-size:1.25rem;color:${p.color};"></i>
-            </div>
-            <div>
-              <h3 style="font-size:1.05rem;font-weight:800;font-family:'Manrope',sans-serif;margin-bottom:6px;color:white;">${p.title}</h3>
-              <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;">${p.desc}</p>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
-            ${p.items.map(it => `<div style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.03);border-radius:7px;padding:7px 10px;"><i class="fas fa-check" style="color:${p.color};font-size:9px;"></i><span style="font-size:0.78rem;color:var(--text-muted);">${it}</span></div>`).join('')}
-          </div>
-        </div>`).join('')}
-      </div>
-    </div>
-  </section>`
-
-  /* ── TOKENOMICS ── */
-  const tokenomics = `
-  <div class="divider"></div>
-  <section id="tokenomics" class="section">
-    <div class="section-inner">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:start;" id="token-grid">
-        <!-- Left -->
-        <div>
-          <div class="section-label"><i class="fas fa-coins"></i> Tokenomics</div>
-          <h2 class="section-title">ZNTR <span class="gradient-text">Token</span><br/>Economy</h2>
-          <p class="section-subtitle" style="margin-bottom:2rem;">A utility-first token designed for long-term platform sustainability and community governance.</p>
-          <!-- Key info grid -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.75rem;">
-            ${[
-              {label:'Token Name', val:'ZentarAI', icon:'fas fa-tag'},
-              {label:'Ticker', val:'ZNTR', icon:'fas fa-hashtag'},
-              {label:'Total Supply', val:'10,000,000,000', icon:'fas fa-infinity'},
-              {label:'Network', val:'BNB Chain', icon:'fas fa-network-wired'},
-              {label:'Standard', val:'BEP-20', icon:'fas fa-file-code'},
-              {label:'TGE', val:'Q2 2026', icon:'fas fa-calendar'},
-            ].map(it => `
-            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;">
-              <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-                <i class="${it.icon}" style="color:${C};font-size:10px;"></i>
-                <span style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">${it.label}</span>
-              </div>
-              <div style="font-size:0.875rem;font-weight:800;color:white;">${it.val}</div>
+          <h3 style="font-family:var(--z-sans);font-size:1rem;font-weight:700;color:white;margin-bottom:0.625rem;">${m.title}</h3>
+          <p style="font-size:0.8rem;color:var(--z-muted);line-height:1.75;margin-bottom:1rem;font-family:var(--z-body);">${m.desc}</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+            ${m.items.map(it => `
+            <div style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:${m.c}06;border-left:1px solid ${m.c}33;">
+              <i class="fas fa-chevron-right" style="color:${m.c};font-size:0.55rem;"></i>
+              <span style="font-size:0.72rem;color:var(--z-muted);font-family:var(--z-body);">${it}</span>
             </div>`).join('')}
           </div>
-          <!-- Allocations -->
-          <div style="display:flex;flex-direction:column;gap:9px;">
-            ${[
-              {cat:'Ecosystem Rewards', pct:40, color:C, amount:'4.0B'},
-              {cat:'Team & Advisors', pct:15, color:CL, amount:'1.5B'},
-              {cat:'Partnerships', pct:15, color:'#8b5cf6', amount:'1.5B'},
-              {cat:'Private Sale', pct:15, color:'#fbbf24', amount:'1.5B'},
-              {cat:'Protocol Reserve', pct:10, color:'#f97316', amount:'1.0B'},
-              {cat:'Public Sale', pct:5, color:'#22c55e', amount:'0.5B'},
-            ].map(a => `
-            <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:11px;padding:12px 16px;">
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <div style="width:9px;height:9px;background:${a.color};border-radius:3px;"></div>
-                  <span style="font-size:0.82rem;font-weight:700;color:white;">${a.cat}</span>
+        </div>`).join('')}
+      </div>
+
+      <!-- Ecosystem stats row -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(16,185,129,0.08);" class="z-reveal" id="z-eco-stats">
+        ${[
+          {v:'500+', l:'data sources', suffix:'', c:C},
+          {v:'6',    l:'tier-1 partners', suffix:'', c:CL},
+          {v:'99.9', l:'% uptime SLA', suffix:'%', c:'#8b5cf6'},
+          {v:'Q2',   l:'2026 TGE launch', suffix:'', c:'#fbbf24'},
+        ].map(s => `
+        <div style="background:var(--z-bg);padding:1.5rem;text-align:center;">
+          <div class="z-stat-num" data-target="${parseInt(s.v)||0}" data-suffix="${s.suffix}" style="color:${s.c};font-size:1.8rem;">${s.v}${s.suffix}</div>
+          <div style="font-family:var(--z-mono);font-size:0.62rem;color:var(--z-dim);letter-spacing:1px;margin-top:6px;text-transform:uppercase;">${s.l}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>`
+
+  /* ══════════════════════════════════════
+     ROADMAP — Vertical Timeline
+  ══════════════════════════════════════ */
+  const roadmap = `
+  <div class="z-hr"></div>
+  <section id="roadmap" class="z-section" style="position:relative;overflow:hidden;">
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,${C}22,${C}44,${C}22,transparent);pointer-events:none;transform:translateX(-50%);"></div>
+    <div class="z-inner" style="position:relative;z-index:1;">
+      <div style="text-align:center;max-width:520px;margin:0 auto 3.5rem;" class="z-reveal">
+        <div class="z-eyebrow">execution timeline</div>
+        <h2 class="z-h2" style="margin-bottom:0.875rem;">
+          from signal<br/><span style="color:${C};">to network.</span>
+        </h2>
+        <p style="font-size:0.92rem;color:var(--z-muted);line-height:1.85;font-family:var(--z-body);">Four milestone-driven phases. Each one expands the intelligence surface area of the ZentarAI network.</p>
+      </div>
+
+      <!-- 4-column grid (different from AILINK) -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;" id="z-roadmap-grid">
+        ${PROJECT.roadmap.map((p,i) => {
+          const sc = p.status==='completed'?'#22c55e':p.status==='in-progress'?C:p.status==='upcoming'?'#fbbf24':'#4a5568'
+          const sl = p.status==='completed'?'DONE':p.status==='in-progress'?'ACTIVE':p.status==='upcoming'?'NEXT':'FUTURE'
+          return `
+          <div class="z-reveal" style="animation-delay:${i*0.1}s;position:relative;">
+            <div style="border:1px solid ${sc}${p.status==='in-progress'?'55':'22'};padding:1.5rem;${p.status==='in-progress'?`box-shadow:0 0 24px ${C}18;`:''}">
+              <!-- Top corner phase label -->
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+                <span style="font-family:var(--z-mono);font-size:0.72rem;font-weight:700;color:${sc};">0${i+1}</span>
+                <span class="z-badge" style="color:${sc};border-color:${sc}44;background:${sc}0e;font-size:0.58rem;">${sl}</span>
+              </div>
+              <div style="font-family:var(--z-mono);font-size:0.65rem;color:${sc};letter-spacing:0.5px;margin-bottom:5px;">${p.period}</div>
+              <h3 style="font-family:var(--z-sans);font-size:1rem;font-weight:700;color:white;margin-bottom:1rem;">${p.phase}</h3>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                ${p.items.map(it => `
+                <div style="display:flex;align-items:flex-start;gap:7px;">
+                  <div style="width:4px;height:4px;background:${sc};flex-shrink:0;margin-top:7px;"></div>
+                  <span style="font-size:0.78rem;color:${p.status==='completed'?'var(--z-dim)':'var(--z-muted)'};line-height:1.5;font-family:var(--z-body);${p.status==='completed'?'text-decoration:line-through;':''}">${it}</span>
+                </div>`).join('')}
+              </div>
+            </div>
+            ${p.status==='in-progress'?`<div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,${C},transparent);"></div>`:''}
+          </div>`}).join('')}
+      </div>
+    </div>
+  </section>`
+
+  /* ══════════════════════════════════════
+     TEAM — Horizontal strip (not grid)
+  ══════════════════════════════════════ */
+  const team = `
+  <div class="z-hr"></div>
+  <section id="team" class="z-section">
+    <div class="z-inner">
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;" id="z-team-grid">
+        <!-- Left: header -->
+        <div class="z-reveal-l">
+          <div class="z-eyebrow">core contributors</div>
+          <h2 class="z-h2" style="margin-bottom:1.25rem;">
+            the minds<br/>behind<br/><span style="color:${C};">the signal.</span>
+          </h2>
+          <p style="font-size:0.88rem;color:var(--z-muted);line-height:1.85;margin-bottom:1.75rem;font-family:var(--z-body);">AI engineers, ML researchers, Web3 growth strategists, and data scientists — assembled to build predictive intelligence infrastructure for the next cycle.</p>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            ${['AI/ML Engineers','Blockchain Devs','Data Scientists','Backend Engineers','Growth Strategists','Research Analysts'].map(r => `
+            <div style="display:flex;align-items:center;gap:8px;">
+              <i class="fas fa-chevron-right" style="color:${C};font-size:0.6rem;"></i>
+              <span style="font-size:0.82rem;color:var(--z-muted);font-family:var(--z-body);">${r}</span>
+            </div>`).join('')}
+          </div>
+        </div>
+        <!-- Right: team cards -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(16,185,129,0.08);" class="z-reveal-r" id="z-team-cards">
+          ${PROJECT.team.map((m,i) => {
+            const cols=[C,CL,'#8b5cf6','#fbbf24']
+            const col=cols[i%cols.length]
+            return `
+            <div style="background:var(--z-bg1);padding:1.5rem;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,${col},transparent);"></div>
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.875rem;">
+                <div style="width:36px;height:36px;background:${col}18;border:1px solid ${col}30;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <span style="font-family:var(--z-mono);font-size:0.9rem;font-weight:700;color:${col};">${m.name.charAt(0)}</span>
                 </div>
                 <div>
-                  <span style="font-size:0.9rem;font-weight:900;color:${a.color};">${a.pct}%</span>
-                  <span style="font-size:0.72rem;color:var(--text-muted);margin-left:7px;">${a.amount}</span>
+                  <div style="font-family:var(--z-sans);font-size:0.9rem;font-weight:600;color:white;">${m.name}</div>
+                  <div style="font-family:var(--z-mono);font-size:0.62rem;color:${col};letter-spacing:0.5px;">${m.role.toLowerCase()}</div>
                 </div>
               </div>
-              <div style="height:4px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden;">
-                <div style="height:100%;width:${a.pct}%;background:${a.color};border-radius:2px;"></div>
-              </div>
-            </div>`).join('')}
-          </div>
-        </div>
-        <!-- Right -->
-        <div style="display:flex;flex-direction:column;gap:1.5rem;">
-          <div class="glass-card" style="padding:2rem;text-align:center;">
-            <div style="position:relative;display:inline-block;">
-              <canvas id="tokenomicsChart" width="260" height="260"></canvas>
-              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
-                <div style="font-size:1.6rem;font-weight:900;font-family:'Manrope',sans-serif;color:white;">10B</div>
-                <div style="font-size:0.72rem;color:var(--text-muted);">ZNTR Supply</div>
-              </div>
-            </div>
-          </div>
-          <!-- Vesting table -->
-          <div class="glass-card" style="padding:1.5rem;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-              <h3 style="font-size:0.95rem;font-weight:800;display:flex;align-items:center;gap:7px;color:white;"><i class="fas fa-calendar-alt" style="color:${C};"></i> Vesting Schedule</h3>
-              <a href="/vesting" style="font-size:0.75rem;color:${C};text-decoration:none;display:flex;align-items:center;gap:4px;font-weight:700;">Full Details <i class="fas fa-arrow-right" style="font-size:9px;"></i></a>
-            </div>
-            <div style="overflow-x:auto;">
-              <table style="width:100%;border-collapse:collapse;font-size:0.78rem;">
-                <thead><tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-                  <th style="text-align:left;padding:7px 5px;color:var(--text-muted);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;">Category</th>
-                  <th style="text-align:center;padding:7px 5px;color:var(--text-muted);font-size:0.68rem;text-transform:uppercase;font-weight:700;">Cliff</th>
-                  <th style="text-align:center;padding:7px 5px;color:var(--text-muted);font-size:0.68rem;text-transform:uppercase;font-weight:700;">Vest</th>
-                </tr></thead>
-                <tbody>
-                  ${[
-                    {cat:'Ecosystem', col:C, cliff:'—', vest:'36 mo'},
-                    {cat:'Team', col:CL, cliff:'12 mo', vest:'36 mo'},
-                    {cat:'Partnerships', col:'#8b5cf6', cliff:'3 mo', vest:'30 mo'},
-                    {cat:'Private Sale', col:'#fbbf24', cliff:'6 mo', vest:'18 mo'},
-                    {cat:'Reserve', col:'#f97316', cliff:'—', vest:'48 mo'},
-                    {cat:'Public Sale', col:'#22c55e', cliff:'—', vest:'TGE'},
-                  ].map(r => `
-                  <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                    <td style="padding:8px 5px;"><div style="display:flex;align-items:center;gap:6px;"><div style="width:7px;height:7px;background:${r.col};border-radius:2px;"></div><span style="color:white;font-weight:600;">${r.cat}</span></div></td>
-                    <td style="text-align:center;padding:8px 5px;color:var(--text-muted);">${r.cliff}</td>
-                    <td style="text-align:center;padding:8px 5px;color:${r.col};font-weight:800;">${r.vest}</td>
-                  </tr>`).join('')}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- 60-Month Vesting Chart -->
-      <div class="glass-card observe" style="padding:2rem;margin-top:1.75rem;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.75rem;">
-          <div>
-            <h3 style="font-size:1.1rem;font-weight:800;font-family:'Manrope',sans-serif;color:white;">60-Month Token Release Schedule</h3>
-            <p style="font-size:0.82rem;color:var(--text-muted);margin-top:4px;">Cumulative circulating supply — fully distributed by Month 48</p>
-          </div>
-          <div style="display:flex;gap:0.875rem;flex-wrap:wrap;">
-            ${[
-              {mo:'Month 1', val:'5.6%', col:C},
-              {mo:'Month 12', val:'33.2%', col:CL},
-              {mo:'Month 24', val:'57.1%', col:'#8b5cf6'},
-              {mo:'Month 36', val:'79.4%', col:'#fbbf24'},
-              {mo:'Month 48', val:'100%', col:'#f97316'},
-            ].map(m => `
-            <div style="text-align:center;">
-              <div style="font-size:0.82rem;font-weight:800;color:${m.col};">${m.val}</div>
-              <div style="font-size:0.65rem;color:var(--text-muted);">${m.mo}</div>
-            </div>`).join('')}
-          </div>
-        </div>
-        <canvas id="vestingChart" height="80"></canvas>
-      </div>
-    </div>
-  </section>`
-
-  /* ── ROADMAP ── */
-  const roadmap = `
-  <div class="divider"></div>
-  <section id="roadmap" class="section">
-    <div class="section-inner">
-      <div style="text-align:center;max-width:620px;margin:0 auto 3.5rem;">
-        <div class="section-label"><i class="fas fa-map"></i> Roadmap</div>
-        <h2 class="section-title">Path to <span class="gradient-text">Intelligence</span></h2>
-        <p class="section-subtitle" style="margin:0 auto;">From MVP to full decentralized AI intelligence network — a phased, milestone-driven rollout.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;" id="roadmap-grid">
-        ${PROJECT.roadmap.map((p, i) => {
-          const sc = p.status==='completed'?'#22c55e':p.status==='in-progress'?C:p.status==='upcoming'?'#fbbf24':'#64748b'
-          const sl = p.status==='completed'?'Completed':p.status==='in-progress'?'Active':'Upcoming'
-          const si = p.status==='completed'?'fas fa-check':p.status==='in-progress'?'fas fa-spinner fa-spin':p.status==='upcoming'?'fas fa-clock':'fas fa-hourglass'
-          return `
-          <div class="glass-card card-glow observe" style="padding:1.625rem;position:relative;animation-delay:${i*0.1}s;${p.status==='in-progress'?`border-color:${C}40;box-shadow:0 4px 28px ${C}18;`:''}">
-            <div style="width:38px;height:38px;background:${sc}18;border:1.5px solid ${sc}40;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:0.875rem;">
-              <span style="font-size:0.82rem;font-weight:900;color:${sc};">0${i+1}</span>
-            </div>
-            <div style="position:absolute;top:1.1rem;right:1.1rem;">
-              <span class="badge" style="background:${sc}15;color:${sc};border:1px solid ${sc}30;font-size:0.65rem;">
-                <i class="${si}" style="font-size:0.55rem;"></i> ${sl}
-              </span>
-            </div>
-            <div style="font-size:0.72rem;color:${sc};font-weight:800;letter-spacing:0.5px;margin-bottom:4px;">${p.period}</div>
-            <h3 style="font-size:1.05rem;font-weight:800;font-family:'Manrope',sans-serif;margin-bottom:1rem;color:white;">${p.phase}</h3>
-            <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-              ${p.items.map(it => `<li style="display:flex;align-items:flex-start;gap:7px;">
-                <div style="width:5px;height:5px;background:${sc};border-radius:50%;flex-shrink:0;margin-top:6px;"></div>
-                <span style="font-size:0.78rem;color:${p.status==='completed'?'var(--text-dim)':'var(--text-muted)'};line-height:1.5;${p.status==='completed'?'text-decoration:line-through;':''}">${it}</span>
-              </li>`).join('')}
-            </ul>
-          </div>`}).join('')}
-      </div>
-    </div>
-  </section>`
-
-  /* ── TEAM ── */
-  const team = `
-  <div class="divider"></div>
-  <section id="team" class="section">
-    <div class="section-inner">
-      <div style="text-align:center;max-width:600px;margin:0 auto 3.5rem;">
-        <div class="section-label"><i class="fas fa-users"></i> Core Team</div>
-        <h2 class="section-title">People Behind <span class="gradient-text">ZentarAI</span></h2>
-        <p class="section-subtitle" style="margin:0 auto;">AI engineers, ML researchers, and Web3 growth strategists united to build the world's most anticipatory intelligence platform.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:1.5rem;">
-        ${PROJECT.team.map((m, i) => {
-          const colors = [C, CL, '#8b5cf6', '#fbbf24']
-          const col = colors[i % colors.length]
-          return `
-          <div class="glass-card card-glow observe" style="padding:1.75rem;position:relative;overflow:hidden;animation-delay:${i*0.1}s;">
-            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,${col},transparent);"></div>
-            <div style="width:60px;height:60px;background:linear-gradient(135deg,${col}33,${col}11);border:2px solid ${col}40;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
-              <span style="font-size:1.4rem;font-weight:900;color:${col};">${m.name.charAt(0)}</span>
-            </div>
-            <h3 style="font-size:1rem;font-weight:800;font-family:'Manrope',sans-serif;margin-bottom:3px;color:white;">${m.name}</h3>
-            <div style="font-size:0.78rem;color:${col};font-weight:700;margin-bottom:0.75rem;">${m.role}</div>
-            <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.65;">${m.bio}</p>
-          </div>`}).join('')}
-      </div>
-      <div class="glass-card observe" style="padding:1.75rem;background:linear-gradient(135deg,rgba(16,185,129,0.05),rgba(16,185,129,0.02));">
-        <div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
-          <div style="flex:1;min-width:260px;">
-            <h3 style="font-size:1.05rem;font-weight:800;color:white;margin-bottom:0.5rem;">Full Team Structure</h3>
-            <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;">Backed by AI engineers, ML researchers, blockchain developers, data scientists, and community growth specialists.</p>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-            ${['AI/ML Engineers','Blockchain Devs','Data Scientists','Backend Engineers','Community Team','Growth Strategists'].map(r => `
-            <div style="display:flex;align-items:center;gap:7px;">
-              <i class="fas fa-check-circle" style="color:${C};font-size:11px;"></i>
-              <span style="font-size:0.82rem;color:var(--text-muted);">${r}</span>
-            </div>`).join('')}
-          </div>
+              <p style="font-size:0.78rem;color:var(--z-muted);line-height:1.7;font-family:var(--z-body);">${m.bio}</p>
+            </div>`}).join('')}
         </div>
       </div>
     </div>
   </section>`
 
-  /* ── PARTNERS ── */
+  /* ══════════════════════════════════════
+     PARTNERS — Logo strip + detail cards
+  ══════════════════════════════════════ */
   const partners = `
-  <div class="divider"></div>
-  <section id="partners" class="section" style="background:rgba(16,185,129,0.02);">
-    <div class="section-inner">
-      <div style="text-align:center;max-width:600px;margin:0 auto 3.5rem;">
-        <div class="section-label"><i class="fas fa-handshake"></i> Partners & Ecosystem</div>
-        <h2 class="section-title">Powered By the <span class="gradient-text">Best</span></h2>
-        <p class="section-subtitle" style="margin:0 auto;">Strategic partnerships with leading blockchain infrastructure, AI research, and security providers.</p>
+  <div class="z-hr"></div>
+  <section id="partners" class="z-section" style="background:${C}03;">
+    <div class="z-inner">
+      <div style="text-align:center;max-width:500px;margin:0 auto 3rem;" class="z-reveal">
+        <div class="z-eyebrow">infrastructure partners</div>
+        <h2 class="z-h2" style="margin-bottom:0.875rem;">
+          built on<br/><span style="color:${C};">proven rails.</span>
+        </h2>
+        <p style="font-size:0.88rem;color:var(--z-muted);line-height:1.85;font-family:var(--z-body);">Every component of ZentarAI runs on battle-tested infrastructure. No experimental dependencies.</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;" id="partner-grid">
+
+      <!-- Partner grid: 3 cols, flat minimal style -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(16,185,129,0.08);margin-bottom:2rem;" class="z-reveal" id="z-partner-grid">
         ${[
-          {name:'BNB Chain',cat:'Infrastructure',icon:'fas fa-link',color:'#f3ba2f',url:'https://www.bnbchain.org',desc:'Native blockchain network'},
-          {name:'PancakeSwap',cat:'DEX',icon:'fas fa-exchange-alt',color:'#1FC7D4',url:'https://pancakeswap.finance',desc:'Primary DEX listing'},
-          {name:'Chainlink',cat:'Oracle',icon:'fas fa-link',color:'#375BD2',url:'https://chain.link',desc:'Decentralized data oracles'},
-          {name:'CertiK',cat:'Security',icon:'fas fa-shield-alt',color:'#00D1A0',url:'https://www.certik.com',desc:'Smart contract audit'},
-          {name:'Google Cloud AI',cat:'Cloud AI',icon:'fab fa-google',color:'#4285F4',url:'https://cloud.google.com/ai',desc:'AI model infrastructure'},
-          {name:'OKX Web3',cat:'Exchange',icon:'fas fa-exchange-alt',color:'#00CCFF',url:'https://www.okx.com/web3',desc:'Web3 wallet & DEX partner'},
-        ].map((p, i) => `
-        <a href="${p.url}" target="_blank" rel="noopener" class="glass-card card-glow observe" style="padding:1.25rem;text-decoration:none;display:flex;flex-direction:column;gap:10px;animation-delay:${i*0.06}s;transition:transform 0.25s;"
-          onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+          {name:'BNB Chain',      cat:'infrastructure', icon:'fas fa-link',          c:'#f3ba2f', url:'https://www.bnbchain.org',       desc:'Native blockchain network — Chain ID 56'},
+          {name:'PancakeSwap',    cat:'dex_listing',    icon:'fas fa-exchange-alt',  c:'#1FC7D4', url:'https://pancakeswap.finance',    desc:'Initial DEX liquidity event at TGE'},
+          {name:'Chainlink',      cat:'oracle_layer',   icon:'fas fa-link',          c:'#375BD2', url:'https://chain.link',             desc:'Decentralized price and data oracles'},
+          {name:'CertiK',         cat:'security_audit', icon:'fas fa-shield-alt',    c:'#00D1A0', url:'https://www.certik.com',          desc:'Pre-TGE smart contract audit (planned)'},
+          {name:'Google Cloud AI',cat:'ai_infra',       icon:'fab fa-google',        c:'#4285F4', url:'https://cloud.google.com/ai',    desc:'ML model hosting and GPU compute layer'},
+          {name:'OKX Web3',       cat:'exchange',       icon:'fas fa-exchange-alt',  c:'#00CCFF', url:'https://www.okx.com/web3',       desc:'Web3 wallet and DEX routing partner'},
+        ].map((p,i) => `
+        <a href="${p.url}" target="_blank" rel="noopener" class="z-reveal" style="background:var(--z-bg);padding:1.5rem;text-decoration:none;display:flex;flex-direction:column;gap:0.875rem;animation-delay:${i*0.06}s;transition:background 0.2s;"
+          onmouseover="this.style.background='${p.c}08'" onmouseout="this.style.background='var(--z-bg)'">
           <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div style="width:42px;height:42px;background:${p.color}18;border:1px solid ${p.color}30;border-radius:11px;display:flex;align-items:center;justify-content:center;">
-              <i class="${p.icon}" style="font-size:1rem;color:${p.color};"></i>
+            <div style="width:38px;height:38px;background:${p.c}12;border:1px solid ${p.c}22;display:flex;align-items:center;justify-content:center;">
+              <i class="${p.icon}" style="color:${p.c};font-size:0.95rem;"></i>
             </div>
-            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-dim);">${p.cat}</span>
+            <span style="font-family:var(--z-mono);font-size:0.58rem;color:var(--z-dim);letter-spacing:1px;text-transform:uppercase;">${p.cat}</span>
           </div>
           <div>
-            <div style="font-size:0.9rem;font-weight:800;color:white;margin-bottom:3px;">${p.name}</div>
-            <div style="font-size:0.78rem;color:var(--text-muted);">${p.desc}</div>
+            <div style="font-family:var(--z-sans);font-size:0.9rem;font-weight:600;color:white;margin-bottom:3px;">${p.name}</div>
+            <div style="font-size:0.75rem;color:var(--z-muted);font-family:var(--z-body);">${p.desc}</div>
           </div>
-          <div style="display:flex;align-items:center;gap:4px;color:var(--text-dim);font-size:0.72rem;margin-top:auto;">
-            <i class="fas fa-external-link-alt" style="font-size:9px;"></i> Visit →
+          <div style="display:flex;align-items:center;gap:4px;font-family:var(--z-mono);font-size:0.62rem;color:var(--z-dim);">
+            <i class="fas fa-external-link-alt" style="font-size:0.55rem;"></i> visit_site
           </div>
         </a>`).join('')}
       </div>
-      <div class="glass-card" style="padding:2.25rem;text-align:center;background:linear-gradient(135deg,rgba(16,185,129,0.07),rgba(16,185,129,0.03));border:1px solid rgba(16,185,129,0.18);">
-        <div class="section-label" style="margin-bottom:0.875rem;"><i class="fas fa-plus"></i> Partnership Program</div>
-        <h3 style="font-size:1.4rem;font-weight:900;font-family:'Manrope',sans-serif;margin-bottom:0.6rem;color:white;">Become a ZentarAI Partner</h3>
-        <p style="font-size:0.875rem;color:var(--text-muted);max-width:440px;margin:0 auto 1.5rem;line-height:1.7;">DeFi protocols, AI research labs, data providers, and ecosystem builders — join the growing ZentarAI intelligence network.</p>
-        <a href="${PROJECT.urls.telegram}" target="_blank" class="btn-primary"><i class="fab fa-telegram"></i> Contact via Telegram</a>
-      </div>
-    </div>
-  </section>`
 
-  /* ── STATS ── */
-  const stats = `
-  <div class="divider"></div>
-  <section id="stats" class="section" style="position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,${C}07 0%,transparent 70%);pointer-events:none;"></div>
-    <div class="section-inner observe" style="position:relative;z-index:1;">
-      <div style="text-align:center;max-width:640px;margin:0 auto 3rem;">
-        <div class="section-label"><i class="fas fa-chart-line"></i> Platform Stats</div>
-        <h2 class="section-title">ZentarAI at a <span class="gradient-text">Glance</span></h2>
-        <p class="section-subtitle" style="margin:0 auto;">Key metrics as we build toward the Q2 2026 TGE launch.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:2rem;" id="stats-grid">
-        ${[
-          {icon:'fas fa-users', color:C, val:'24k+', label:'Community Members', sub:'X followers', trend:'+2k this month'},
-          {icon:'fas fa-coins', color:CL, val:'10B', label:'Total Supply', sub:'ZNTR tokens', trend:'BEP-20 on BNB Chain'},
-          {icon:'fas fa-satellite-dish', color:'#8b5cf6', val:'500+', label:'Data Sources', sub:'Real-time streams', trend:'Sub-1s latency'},
-          {icon:'fas fa-calendar', color:'#fbbf24', val:'Q2 2026', label:'TGE Target', sub:'DEX listing', trend:'PancakeSwap first'},
-        ].map(s => `
-        <div class="glass-card observe" style="padding:1.75rem;text-align:center;position:relative;overflow:hidden;">
-          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,${s.color}10 0%,transparent 70%);pointer-events:none;"></div>
-          <div style="width:50px;height:50px;background:${s.color}18;border:1px solid ${s.color}30;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
-            <i class="${s.icon}" style="font-size:1.25rem;color:${s.color};"></i>
-          </div>
-          <div style="font-size:1.9rem;font-weight:900;font-family:'Manrope',sans-serif;color:${s.color};margin-bottom:5px;letter-spacing:-1px;">${s.val}</div>
-          <div style="font-size:0.875rem;font-weight:700;color:white;margin-bottom:3px;">${s.label}</div>
-          <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.75rem;">${s.sub}</div>
-          <div style="font-size:0.68rem;color:${s.color};background:${s.color}12;border:1px solid ${s.color}20;border-radius:6px;padding:3px 8px;display:inline-block;">${s.trend}</div>
-        </div>`).join('')}
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
-        ${[
-          {label:'BNB Chain', icon:'fas fa-link', color:'#f3ba2f', sub:'Primary network'},
-          {label:'6 Partners', icon:'fas fa-handshake', color:C, sub:'Tier-1 ecosystem'},
-          {label:'CertiK Audit', icon:'fas fa-shield-alt', color:'#22c55e', sub:'Security verified'},
-          {label:'AI + BNB Chain', icon:'fas fa-brain', color:'#8b5cf6', sub:'Signals · Predict · Govern'},
-        ].map(s => `
-        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:1.1rem 1rem;display:flex;align-items:center;gap:12px;transition:all 0.25s;"
-          onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
-          <div style="width:38px;height:38px;background:${s.color}15;border:1px solid ${s.color}25;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <i class="${s.icon}" style="font-size:1rem;color:${s.color};"></i>
-          </div>
-          <div>
-            <div style="font-size:0.875rem;font-weight:700;color:white;">${s.label}</div>
-            <div style="font-size:0.72rem;color:var(--text-muted);">${s.sub}</div>
-          </div>
-        </div>`).join('')}
-      </div>
-    </div>
-  </section>`
-
-  /* ── COMMUNITY ── */
-  const community = `
-  <div class="divider"></div>
-  <section id="community" class="section" style="position:relative;overflow:hidden;">
-    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,${C}07 0%,transparent 70%);pointer-events:none;"></div>
-    <div class="section-inner observe" style="position:relative;z-index:1;">
-      <div style="text-align:center;max-width:640px;margin:0 auto 3rem;">
-        <div class="section-label"><i class="fab fa-twitter"></i> Community</div>
-        <h2 class="section-title">Join the <span class="gradient-text">Intelligence Movement</span></h2>
-        <p class="section-subtitle" style="margin:0 auto;">24,000+ members already following ZentarAI. Be first to act on intelligence.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
-        <!-- X/Twitter -->
-        <div class="glass-card card-glow" style="padding:2.25rem;background:linear-gradient(135deg,rgba(15,20,28,0.95),rgba(6,12,16,0.98));border:1px solid rgba(255,255,255,0.1);position:relative;overflow:hidden;">
-          <div style="position:absolute;top:-30px;right:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:1.25rem;">
-            <div style="width:52px;height:52px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);border-radius:14px;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-x-twitter" style="font-size:1.375rem;color:white;"></i>
-            </div>
-            <div>
-              <div style="font-size:1.1rem;font-weight:900;font-family:'Manrope',sans-serif;color:white;">X (Twitter)</div>
-              <div style="font-size:0.82rem;color:var(--text-muted);">@intellora_</div>
-            </div>
-          </div>
-          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.5rem;">Stay ahead with ZentarAI signal alerts, TGE updates, product launches, and ecosystem announcements — delivered daily.</p>
-          <div style="display:flex;gap:1.5rem;margin-bottom:1.5rem;">
-            ${[{val:'24k+',label:'Followers'},{val:'Daily',label:'Signals'},{val:'Active',label:'Community'}].map(s => `
-            <div><div style="font-size:1.1rem;font-weight:900;color:white;">${s.val}</div><div style="font-size:0.7rem;color:var(--text-muted);">${s.label}</div></div>`).join('')}
-          </div>
-          <a href="${PROJECT.urls.twitter}" target="_blank" rel="noopener" class="btn-ghost" style="width:100%;justify-content:center;">
-            <i class="fab fa-x-twitter"></i> Follow @intellora_
-          </a>
-        </div>
-        <!-- Telegram -->
-        <div class="glass-card card-glow" style="padding:2.25rem;background:linear-gradient(135deg,rgba(0,136,204,0.08),rgba(6,12,16,0.98));border:1px solid rgba(0,136,204,0.2);position:relative;overflow:hidden;">
-          <div style="position:absolute;top:-30px;right:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(0,136,204,0.1) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:1.25rem;">
-            <div style="width:52px;height:52px;background:rgba(0,136,204,0.15);border:1px solid rgba(0,136,204,0.3);border-radius:14px;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-telegram" style="font-size:1.375rem;color:#29A0D8;"></i>
-            </div>
-            <div>
-              <div style="font-size:1.1rem;font-weight:900;font-family:'Manrope',sans-serif;color:white;">Telegram</div>
-              <div style="font-size:0.82rem;color:var(--text-muted);">t.me/ZentarAI</div>
-            </div>
-          </div>
-          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.5rem;">Join our Telegram for direct team access, real-time signal discussions, AMA sessions, and exclusive early supporter benefits.</p>
-          <div style="display:flex;gap:1.5rem;margin-bottom:1.5rem;">
-            ${[{val:'Growing',label:'Members'},{val:'24/7',label:'Active'},{val:'AMA',label:'Sessions'}].map(s => `
-            <div><div style="font-size:1.1rem;font-weight:900;color:white;">${s.val}</div><div style="font-size:0.7rem;color:var(--text-muted);">${s.label}</div></div>`).join('')}
-          </div>
-          <a href="${PROJECT.urls.telegram}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:0.8rem;background:rgba(0,136,204,0.15);border:1px solid rgba(0,136,204,0.3);border-radius:10px;color:#29A0D8;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.2s;"
-            onmouseover="this.style.background='rgba(0,136,204,0.25)'" onmouseout="this.style.background='rgba(0,136,204,0.15)'">
-            <i class="fab fa-telegram"></i> Join Telegram Community
-          </a>
-        </div>
-      </div>
-      <!-- Early access banner -->
-      <div style="background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(16,185,129,0.04));border:1px solid rgba(16,185,129,0.22);border-radius:1.25rem;padding:2.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+      <!-- Partnership CTA -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;padding:1.75rem;border:1px solid ${C}20;background:${C}06;" class="z-reveal">
         <div>
-          <div class="section-label" style="margin-bottom:0.75rem;"><i class="fas fa-star"></i> Early Access</div>
-          <h3 style="font-size:1.4rem;font-weight:900;font-family:'Manrope',sans-serif;margin-bottom:0.6rem;color:white;">Get Early Supporter Benefits</h3>
-          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7;max-width:480px;">Early community members receive priority whitelist access for Private Sale, exclusive ZentarAI Early Supporter badge, and premium signal tier at TGE.</p>
-          <div style="display:flex;gap:1.25rem;margin-top:1rem;flex-wrap:wrap;">
+          <div style="font-family:var(--z-mono);font-size:0.62rem;color:${C};letter-spacing:2px;margin-bottom:6px;">// PARTNERSHIP_PROGRAM</div>
+          <h3 style="font-family:var(--z-sans);font-size:1.1rem;font-weight:700;color:white;margin-bottom:5px;">Integrate ZentarAI signals into your protocol.</h3>
+          <p style="font-size:0.82rem;color:var(--z-muted);font-family:var(--z-body);">DeFi protocols, AI research labs, data providers — apply for early API access and co-marketing.</p>
+        </div>
+        <a href="${PROJECT.urls.telegram}" target="_blank" class="z-btn" style="flex-shrink:0;"><i class="fab fa-telegram" style="font-size:0.75rem;"></i> apply_partnership</a>
+      </div>
+    </div>
+  </section>`
+
+  /* ══════════════════════════════════════
+     COMMUNITY — Asymmetric layout
+  ══════════════════════════════════════ */
+  const community = `
+  <div class="z-hr"></div>
+  <section id="community" class="z-section" style="position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;right:0;width:500px;height:500px;background:radial-gradient(circle,${C}07 0%,transparent 60%);pointer-events:none;"></div>
+    <div class="z-inner" style="position:relative;z-index:1;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;" id="z-comm-grid">
+
+        <!-- X card -->
+        <div class="z-card z-reveal-l" style="padding:2rem;overflow:hidden;position:relative;">
+          <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,white,rgba(255,255,255,0.2));"></div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;">
+            <div style="width:46px;height:46px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;">
+              <i class="fab fa-x-twitter" style="font-size:1.2rem;color:white;"></i>
+            </div>
+            <div>
+              <div style="font-family:var(--z-sans);font-size:1rem;font-weight:700;color:white;">X (Twitter)</div>
+              <div style="font-family:var(--z-mono);font-size:0.65rem;color:var(--z-muted);">@intellora_</div>
+            </div>
+          </div>
+          <p style="font-size:0.85rem;color:var(--z-muted);line-height:1.8;margin-bottom:1.25rem;font-family:var(--z-body);">Signal alerts, TGE countdown, product drops, and ecosystem announcements — delivered daily to 24k+ followers.</p>
+          <div style="display:flex;gap:2rem;margin-bottom:1.5rem;">
+            ${[{v:'24k+',l:'followers'},{v:'Daily',l:'signals'},{v:'Active',l:'community'}].map(s=>`
+            <div><div style="font-family:var(--z-mono);font-size:1rem;font-weight:700;color:white;">${s.v}</div><div style="font-family:var(--z-mono);font-size:0.6rem;color:var(--z-dim);letter-spacing:1px;">${s.l}</div></div>`).join('')}
+          </div>
+          <a href="${PROJECT.urls.twitter}" target="_blank" class="z-btn-ghost" style="width:100%;justify-content:center;">
+            <i class="fab fa-x-twitter"></i> follow @intellora_
+          </a>
+        </div>
+
+        <!-- Telegram card -->
+        <div class="z-card z-reveal-r" style="padding:2rem;overflow:hidden;position:relative;border-color:rgba(41,160,216,0.25);">
+          <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,#29A0D8,rgba(41,160,216,0.2));"></div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;">
+            <div style="width:46px;height:46px;background:rgba(41,160,216,0.12);border:1px solid rgba(41,160,216,0.25);display:flex;align-items:center;justify-content:center;">
+              <i class="fab fa-telegram" style="font-size:1.2rem;color:#29A0D8;"></i>
+            </div>
+            <div>
+              <div style="font-family:var(--z-sans);font-size:1rem;font-weight:700;color:white;">Telegram</div>
+              <div style="font-family:var(--z-mono);font-size:0.65rem;color:var(--z-muted);">t.me/ZentarAI</div>
+            </div>
+          </div>
+          <p style="font-size:0.85rem;color:var(--z-muted);line-height:1.8;margin-bottom:1.25rem;font-family:var(--z-body);">Direct team access, real-time signal discussions, AMA sessions, and exclusive early supporter benefits — 24/7 active.</p>
+          <div style="display:flex;gap:2rem;margin-bottom:1.5rem;">
+            ${[{v:'Growing',l:'members'},{v:'24/7',l:'active'},{v:'AMA',l:'sessions'}].map(s=>`
+            <div><div style="font-family:var(--z-mono);font-size:1rem;font-weight:700;color:white;">${s.v}</div><div style="font-family:var(--z-mono);font-size:0.6rem;color:var(--z-dim);letter-spacing:1px;">${s.l}</div></div>`).join('')}
+          </div>
+          <a href="${PROJECT.urls.telegram}" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:0.75rem;background:rgba(41,160,216,0.1);border:1px solid rgba(41,160,216,0.25);color:#29A0D8;font-family:var(--z-mono);font-size:0.75rem;font-weight:600;text-decoration:none;letter-spacing:0.5px;transition:all 0.2s;"
+            onmouseover="this.style.background='rgba(41,160,216,0.2)'" onmouseout="this.style.background='rgba(41,160,216,0.1)'">
+            <i class="fab fa-telegram"></i> join_community
+          </a>
+        </div>
+      </div>
+
+      <!-- Early access strip -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;padding:1.75rem;border:1px solid ${C}22;background:${C}06;position:relative;overflow:hidden;" class="z-reveal">
+        <div style="position:absolute;right:-30px;top:-30px;width:180px;height:180px;background:radial-gradient(circle,${C}10,transparent);pointer-events:none;"></div>
+        <div style="position:relative;z-index:1;">
+          <div style="font-family:var(--z-mono);font-size:0.62rem;color:${C};letter-spacing:2px;margin-bottom:6px;">// EARLY_SUPPORTER_PROGRAM</div>
+          <h3 style="font-family:var(--z-sans);font-size:1.1rem;font-weight:700;color:white;margin-bottom:6px;">Secure your whitelist spot before TGE.</h3>
+          <p style="font-size:0.82rem;color:var(--z-muted);font-family:var(--z-body);">Early community members get private sale whitelist priority, exclusive badge, and premium signal tier at launch.</p>
+          <div style="display:flex;gap:1.5rem;margin-top:0.875rem;flex-wrap:wrap;">
             ${[
-              {icon:'fas fa-key', color:'#fbbf24', text:'Whitelist Priority'},
-              {icon:'fas fa-medal', color:C, text:'Early Supporter Badge'},
-              {icon:'fas fa-signal', color:CL, text:'Premium Signal Tier'},
-            ].map(b => `
+              {icon:'fas fa-key',    c:'#fbbf24', t:'whitelist_priority'},
+              {icon:'fas fa-medal',  c:C,         t:'early_badge'},
+              {icon:'fas fa-signal', c:CL,        t:'premium_signals'},
+            ].map(b=>`
             <div style="display:flex;align-items:center;gap:6px;">
-              <i class="${b.icon}" style="color:${b.color};font-size:0.75rem;"></i>
-              <span style="font-size:0.8rem;color:var(--text-muted);font-weight:600;">${b.text}</span>
+              <i class="${b.icon}" style="color:${b.c};font-size:0.7rem;"></i>
+              <span style="font-family:var(--z-mono);font-size:0.65rem;color:var(--z-muted);letter-spacing:0.5px;">${b.t}</span>
             </div>`).join('')}
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:0.75rem;min-width:220px;">
-          <a href="${PROJECT.urls.twitter}" target="_blank" class="btn-primary" style="justify-content:center;"><i class="fab fa-x-twitter"></i> Follow for Updates</a>
-          <a href="${PROJECT.urls.telegram}" target="_blank" class="btn-outline" style="justify-content:center;"><i class="fab fa-telegram"></i> Join Community</a>
+        <div style="display:flex;flex-direction:column;gap:0.625rem;min-width:200px;position:relative;z-index:1;">
+          <a href="${PROJECT.urls.twitter}" target="_blank" class="z-btn" style="justify-content:center;font-size:0.72rem;padding:0.65rem 1.2rem;"><i class="fab fa-x-twitter" style="font-size:0.65rem;"></i> follow_for_updates</a>
+          <a href="${PROJECT.urls.telegram}" target="_blank" class="z-btn-outline" style="justify-content:center;font-size:0.72rem;padding:0.65rem 1.2rem;"><i class="fab fa-telegram" style="font-size:0.65rem;"></i> join_telegram</a>
         </div>
       </div>
     </div>
   </section>`
 
-  /* ── FAQ ── */
+  /* ══════════════════════════════════════
+     FAQ
+  ══════════════════════════════════════ */
   const faq = `
-  <div class="divider"></div>
-  <section id="faq" class="section">
-    <div class="section-inner">
-      <div style="text-align:center;max-width:600px;margin:0 auto 3rem;">
-        <div class="section-label"><i class="fas fa-question-circle"></i> FAQ</div>
-        <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
-      </div>
-      <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:0.75rem;">
-        ${PROJECT.faq.map((item, i) => `
-        <div class="glass-card" style="border-radius:14px;overflow:hidden;">
-          <button onclick="toggleFaq(${i})" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:transparent;border:none;cursor:pointer;text-align:left;gap:1rem;">
-            <span style="font-size:0.95rem;font-weight:700;color:white;">${item.q}</span>
-            <i class="fas fa-chevron-down" id="faq-icon-${i}" style="color:${C};font-size:0.8rem;flex-shrink:0;transition:transform 0.3s;"></i>
-          </button>
-          <div id="faq-body-${i}" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease;">
-            <div style="padding:0 1.5rem 1.25rem;font-size:0.875rem;color:var(--text-muted);line-height:1.8;">${item.a}</div>
-          </div>
-        </div>`).join('')}
+  <div class="z-hr"></div>
+  <section id="faq" class="z-section">
+    <div class="z-inner">
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;" id="z-faq-grid">
+        <div class="z-reveal-l">
+          <div class="z-eyebrow">knowledge base</div>
+          <h2 class="z-h2" style="margin-bottom:1rem;">
+            questions<br/><span style="color:${C};">answered.</span>
+          </h2>
+          <p style="font-size:0.88rem;color:var(--z-muted);line-height:1.85;font-family:var(--z-body);">Everything you need to know about ZentarAI, ZNTR, and the signal intelligence platform.</p>
+        </div>
+        <div class="z-reveal-r" style="display:flex;flex-direction:column;gap:0;border:1px solid rgba(16,185,129,0.1);">
+          ${PROJECT.faq.map((item,i) => `
+          <div style="border-bottom:1px solid rgba(255,255,255,0.04);">
+            <button onclick="toggleFaq(${i})" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem;background:transparent;border:none;cursor:pointer;text-align:left;gap:1rem;transition:background 0.2s;"
+              onmouseover="this.style.background='rgba(16,185,129,0.04)'" onmouseout="this.style.background='transparent'">
+              <span style="font-family:var(--z-sans);font-size:0.9rem;font-weight:600;color:white;">${item.q}</span>
+              <i class="fas fa-chevron-down" id="faq-icon-${i}" style="color:${C};font-size:0.72rem;flex-shrink:0;transition:transform 0.3s;"></i>
+            </button>
+            <div id="faq-body-${i}" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease;">
+              <div style="padding:0 1.25rem 1.1rem;font-size:0.85rem;color:var(--z-muted);line-height:1.85;font-family:var(--z-body);">${item.a}</div>
+            </div>
+          </div>`).join('')}
+        </div>
       </div>
     </div>
   </section>`
 
-  /* ── CTA ── */
+  /* ══════════════════════════════════════
+     CTA — Full-bleed terminal style
+  ══════════════════════════════════════ */
   const cta = `
-  <div class="divider"></div>
-  <section class="section observe" style="position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background:linear-gradient(135deg,${C}0d,${CD}07);"></div>
-    <div class="grid-bg" style="position:absolute;inset:0;opacity:0.3;"></div>
-    <div class="section-inner" style="position:relative;z-index:1;">
-      <div style="text-align:center;max-width:680px;margin:0 auto;">
-        <div class="section-label" style="margin-bottom:1.375rem;"><i class="fas fa-rocket"></i> Join ZentarAI</div>
-        <h2 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;font-family:'Manrope',sans-serif;line-height:1.1;letter-spacing:-1.5px;margin-bottom:1.1rem;color:white;">
-          Act on Intelligence<br/><span class="gradient-text">Before the Market Does.</span>
-        </h2>
-        <p style="font-size:1rem;color:var(--text-muted);line-height:1.8;margin-bottom:2.25rem;">ZentarAI turns overwhelming inputs into operational foresight. Confidence becomes your competitive edge.</p>
-        <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
-          <a href="${PROJECT.urls.twitter}" target="_blank" class="btn-primary" style="font-size:0.95rem;"><i class="fab fa-x-twitter"></i> Follow on X</a>
-          <a href="${PROJECT.urls.telegram}" target="_blank" class="btn-outline" style="font-size:0.95rem;"><i class="fab fa-telegram"></i> Join Telegram</a>
-          <a href="/whitepaper" class="btn-ghost" style="font-size:0.9rem;"><i class="fas fa-file-alt"></i> Whitepaper</a>
-        </div>
+  <div class="z-hr"></div>
+  <section class="z-section z-reveal" style="position:relative;overflow:hidden;">
+    <div class="z-grid-bg" style="position:absolute;inset:0;opacity:0.35;pointer-events:none;"></div>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,${C}0d 0%,transparent 60%);pointer-events:none;"></div>
+    <div class="z-inner" style="position:relative;z-index:1;text-align:center;">
+      <div style="font-family:var(--z-mono);font-size:0.62rem;color:${C};letter-spacing:3px;text-transform:uppercase;margin-bottom:1.5rem;">// JOIN_ZENTARAI_NETWORK</div>
+      <h2 style="font-family:var(--z-sans);font-size:clamp(2rem,5vw,3.4rem);font-weight:700;line-height:1.08;letter-spacing:-1.5px;margin-bottom:1.1rem;color:white;">
+        stop reacting.<br/><span class="z-neon">start predicting.</span>
+      </h2>
+      <p style="font-size:1rem;color:var(--z-muted);line-height:1.85;margin-bottom:2.25rem;max-width:500px;margin-left:auto;margin-right:auto;font-family:var(--z-body);">ZentarAI compresses the gap between raw market noise and decisive intelligence. Your edge begins here.</p>
+      <div style="display:flex;gap:0.875rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;">
+        <a href="${PROJECT.urls.twitter}" target="_blank" class="z-btn"><i class="fab fa-x-twitter" style="font-size:0.75rem;"></i> follow_on_x</a>
+        <a href="${PROJECT.urls.telegram}" target="_blank" class="z-btn-outline"><i class="fab fa-telegram" style="font-size:0.75rem;"></i> join_telegram</a>
+        <a href="/whitepaper" class="z-btn-ghost"><i class="fas fa-book" style="font-size:0.75rem;"></i> read_docs</a>
+      </div>
+      <!-- Status line -->
+      <div style="display:inline-flex;align-items:center;gap:10px;font-family:var(--z-mono);font-size:0.65rem;color:var(--z-dim);">
+        <span style="width:5px;height:5px;background:${C};animation:z-signal-pulse 2s infinite;display:inline-block;"></span>
+        SIGNAL_ENGINE: ONLINE · TGE_TARGET: ${PROJECT.tge.toUpperCase()} · CHAIN: BNB_MAINNET_56
       </div>
     </div>
   </section>`
@@ -688,180 +866,95 @@ export function homePage(): string {
   const responsive = `
   <style>
     @media(max-width:1024px){
-      #hero-grid{grid-template-columns:1fr!important;gap:2.5rem!important;}
-      #hero-grid>div:last-child{display:none;}
-      #token-grid{grid-template-columns:1fr!important;gap:2rem!important;}
-      #team-grid{grid-template-columns:repeat(2,1fr)!important;}
+      #z-hero-grid{grid-template-columns:1fr!important;}
+      #z-hero-right{display:none!important;}
+      #z-token-grid{grid-template-columns:1fr!important;}
+      #z-arch-grid{grid-template-columns:1fr!important;}
+      #z-team-grid{grid-template-columns:1fr!important;}
     }
     @media(max-width:900px){
-      #trust-bar{grid-template-columns:repeat(3,1fr)!important;}
-      #feat-grid,#eco-pillars{grid-template-columns:repeat(2,1fr)!important;}
-      #partner-grid{grid-template-columns:repeat(2,1fr)!important;}
-      #roadmap-grid{grid-template-columns:repeat(2,1fr)!important;}
-      #hiw-grid{grid-template-columns:1fr!important;}
-      #eco-flow{grid-template-columns:repeat(2,1fr)!important;}
+      #z-metrics-bar{grid-template-columns:repeat(3,1fr)!important;}
+      #z-pipeline{grid-template-columns:1fr!important;}
+      #z-pipeline>*:nth-child(2),#z-pipeline>*:nth-child(4){display:none!important;}
+      #z-network-grid{grid-template-columns:1fr!important;}
+      #z-partner-grid{grid-template-columns:repeat(2,1fr)!important;}
+      #z-faq-grid{grid-template-columns:1fr!important;}
+      #z-roadmap-grid{grid-template-columns:repeat(2,1fr)!important;}
+      #z-team-cards{grid-template-columns:1fr!important;}
     }
     @media(max-width:768px){
-      #community-grid{grid-template-columns:1fr!important;}
-      #stats-grid{grid-template-columns:repeat(2,1fr)!important;}
-      #team-grid{grid-template-columns:1fr!important;}
+      #z-comm-grid{grid-template-columns:1fr!important;}
+      #z-eco-stats{grid-template-columns:repeat(2,1fr)!important;}
+      #z-team-cards{grid-template-columns:1fr 1fr!important;}
     }
     @media(max-width:599px){
-      #trust-bar{grid-template-columns:repeat(2,1fr)!important;}
-      #feat-grid,#partner-grid,#roadmap-grid,#stats-grid{grid-template-columns:1fr!important;}
-      #eco-pillars{grid-template-columns:1fr!important;}
+      #z-metrics-bar{grid-template-columns:repeat(2,1fr)!important;}
+      #z-partner-grid{grid-template-columns:1fr!important;}
+      #z-roadmap-grid{grid-template-columns:1fr!important;}
+      #z-eco-stats{grid-template-columns:1fr 1fr!important;}
+      #z-team-cards{grid-template-columns:1fr!important;}
     }
   </style>`
 
-  /* ── GET STARTED / HOW TO JOIN ── */
-  const getStarted = `
-  <div class="divider"></div>
-  <section id="get-started" class="section" style="position:relative;overflow:hidden;">
-    <div class="grid-bg" style="position:absolute;inset:0;opacity:0.25;"></div>
-    <div class="section-inner observe" style="position:relative;z-index:1;">
-      <div style="text-align:center;max-width:640px;margin:0 auto 3.5rem;">
-        <div class="section-label"><i class="fas fa-map-signs"></i> Get Started</div>
-        <h2 class="section-title">Access Intelligence in <span class="gradient-text">3 Simple Steps</span></h2>
-        <p class="section-subtitle" style="margin:0 auto;">No barriers. Connect your wallet, subscribe to signal feeds, and let ZentarAI surface what matters — before the market moves.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;position:relative;" id="gs-grid">
-        <div style="position:absolute;top:52px;left:calc(16.7% + 50px);right:calc(16.7% + 50px);height:2px;background:linear-gradient(90deg,${C},${CL});opacity:0.25;z-index:0;pointer-events:none;"></div>
-        ${[
-          {step:'01', icon:'fas fa-wallet', color:C, title:'Connect Your Wallet',
-            desc:'Link MetaMask, Trust Wallet, or any BNB Chain-compatible wallet. One-click authentication — no sign-up form required.',
-            items:['MetaMask', 'Trust Wallet', 'WalletConnect', 'OKX Wallet']},
-          {step:'02', icon:'fas fa-satellite-dish', color:CL, title:'Subscribe to Signal Feeds',
-            desc:'Select your signal categories — on-chain whale tracking, DeFi alerts, social sentiment, or cross-protocol anomaly detection.',
-            items:['Whale Tracking', 'DeFi Alerts', 'Sentiment Feed', 'Anomaly Detection']},
-          {step:'03', icon:'fas fa-chart-line', color:'#fbbf24', title:'Act Ahead of the Market',
-            desc:'Receive real-time intelligence in your ZentarAI dashboard. ZNTR token holders unlock premium signal tiers and governance voting.',
-            items:['Dashboard View', 'Signal API', 'ZNTR Staking', 'DAO Governance']},
-        ].map((s, i) => `
-        <div class="glass-card card-glow observe" style="padding:2rem;position:relative;z-index:1;animation-delay:${i*0.12}s;">
-          <div style="position:absolute;top:-1px;left:0;right:0;height:3px;background:linear-gradient(90deg,${s.color},${s.color}60);border-radius:20px 20px 0 0;"></div>
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;">
-            <div style="width:54px;height:54px;background:${s.color}18;border:1px solid ${s.color}35;border-radius:16px;display:flex;align-items:center;justify-content:center;">
-              <i class="${s.icon}" style="font-size:1.375rem;color:${s.color};"></i>
-            </div>
-            <span style="font-size:2.25rem;font-weight:900;font-family:'Manrope',sans-serif;color:${s.color};opacity:0.18;line-height:1;">${s.step}</span>
-          </div>
-          <h3 style="font-size:1.1rem;font-weight:800;font-family:'Manrope',sans-serif;margin-bottom:0.75rem;color:white;">${s.title}</h3>
-          <p style="font-size:0.83rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.1rem;">${s.desc}</p>
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            ${s.items.map(item => `
-            <div style="display:flex;align-items:center;gap:8px;">
-              <i class="fas fa-check-circle" style="color:${s.color};font-size:11px;flex-shrink:0;"></i>
-              <span style="font-size:0.78rem;color:var(--text-muted);">${item}</span>
-            </div>`).join('')}
-          </div>
-        </div>`).join('')}
-      </div>
-      <!-- Progress bar -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:1.5rem;margin-top:3rem;flex-wrap:wrap;">
-        ${[
-          {icon:'fas fa-wallet', label:'Connect', color:C},
-          {icon:'fas fa-arrow-right', label:'', color:'rgba(255,255,255,0.2)', arrow:true},
-          {icon:'fas fa-satellite-dish', label:'Subscribe', color:CL},
-          {icon:'fas fa-arrow-right', label:'', color:'rgba(255,255,255,0.2)', arrow:true},
-          {icon:'fas fa-chart-line', label:'Earn Intelligence', color:'#fbbf24'},
-        ].map(s => (s as any).arrow
-          ? `<i class="${s.icon}" style="color:${s.color};font-size:0.875rem;"></i>`
-          : `<div style="display:flex;align-items:center;gap:8px;">
-              <div style="width:36px;height:36px;background:${s.color}20;border:1px solid ${s.color}35;border-radius:10px;display:flex;align-items:center;justify-content:center;">
-                <i class="${s.icon}" style="color:${s.color};font-size:0.875rem;"></i>
-              </div>
-              <span style="font-size:0.82rem;font-weight:600;color:white;">${s.label}</span>
-            </div>`
-        ).join('')}
-      </div>
-    </div>
-  </section>`
-
-  /* ── CHART SCRIPT ── */
-  const chartScript = `
+  /* ── CHARTS ── */
+  const charts = `
   <script>
-    // FAQ accordion
-    function toggleFaq(i) {
-      const body = document.getElementById('faq-body-'+i);
-      const icon = document.getElementById('faq-icon-'+i);
-      const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
-      document.querySelectorAll('[id^="faq-body-"]').forEach(el=>el.style.maxHeight='0px');
-      document.querySelectorAll('[id^="faq-icon-"]').forEach(el=>el.style.transform='rotate(0deg)');
-      if(!isOpen){body.style.maxHeight=body.scrollHeight+'px';icon.style.transform='rotate(180deg)';}
-    }
-
-    // Tokenomics donut chart
-    (function(){
-      const ctx = document.getElementById('tokenomicsChart');
-      if(!ctx) return;
-      new Chart(ctx,{
+  (function(){
+    // Tokenomics donut
+    const tCtx = document.getElementById('tokenomicsChart');
+    if(tCtx){
+      new Chart(tCtx,{
         type:'doughnut',
         data:{
-          labels:${JSON.stringify(PROJECT.tokenomics.map(t => t.label))},
+          labels:${JSON.stringify(PROJECT.tokenomics.map(t=>t.label))},
           datasets:[{
-            data:${JSON.stringify(PROJECT.tokenomics.map(t => t.pct))},
+            data:${JSON.stringify(PROJECT.tokenomics.map(t=>t.pct))},
             backgroundColor:['${C}','${CL}','#8b5cf6','#fbbf24','#f97316','#22c55e'],
-            borderColor:'#060c10',
+            borderColor:'#030507',
             borderWidth:3,
-            hoverOffset:8
+            hoverOffset:6
           }]
         },
         options:{
-          cutout:'72%',
-          responsive:false,
+          cutout:'74%',responsive:false,
           plugins:{
             legend:{display:false},
             tooltip:{
-              backgroundColor:'#0d1822',
+              backgroundColor:'#0c1318',
               borderColor:'rgba(16,185,129,0.2)',
-              borderWidth:1,
-              titleColor:'#fff',
-              bodyColor:'#8891a5',
-              padding:12,
-              callbacks:{label:ctx=>' '+ctx.label+': '+ctx.raw+'%'}
+              borderWidth:1,titleColor:'#fff',bodyColor:'#6b7d8a',
+              padding:10,
+              callbacks:{label:c=>' '+c.label+': '+c.raw+'%'}
             }
           }
         }
       });
-    })();
+    }
 
-    // 60-month Vesting line chart
-    (function(){
-      const vestCtx = document.getElementById('vestingChart');
-      if(!vestCtx) return;
-      // ZNTR vesting schedule: 10B total
-      // Ecosystem(40%=4B): no cliff, linear 36mo → 111.1M/mo
-      // Team(15%=1.5B): 12mo cliff, 36mo vest → 41.67M/mo from mo13
-      // Partnerships(15%=1.5B): 3mo cliff, 30mo vest → 50M/mo from mo4
-      // Private Sale(15%=1.5B): 6mo cliff, 18mo vest → 83.33M/mo from mo7
-      // Reserve(10%=1B): no cliff, 48mo vest → 20.83M/mo
-      // Public Sale(5%=0.5B): TGE unlock 500M at mo0
-      const months = Array.from({length:61},(_,i)=>i);
-      let cum = 0;
-      const data = months.map(m=>{
-        if(m===0){cum=500;return cum;} // Public Sale TGE
-        cum += 111.1; // Ecosystem
-        if(m>=4 && m<=33) cum += 50; // Partnerships
-        if(m>=7 && m<=24) cum += 83.33; // Private Sale
-        if(m>=13 && m<=48) cum += 41.67; // Team
-        cum += 20.83; // Reserve (capped at 48mo)
+    // 60-month vesting line
+    const vCtx = document.getElementById('vestingChart');
+    if(vCtx){
+      const months=Array.from({length:61},(_,i)=>i);
+      let cum=500;
+      const data=months.map(m=>{
+        if(m===0) return 500;
+        cum+=111.1;
+        if(m>=4&&m<=33)  cum+=50;
+        if(m>=7&&m<=24)  cum+=83.33;
+        if(m>=13&&m<=48) cum+=41.67;
+        cum+=20.83;
         if(cum>10000) cum=10000;
         return Math.round(cum*10)/10;
       });
-      new Chart(vestCtx,{
+      new Chart(vCtx,{
         type:'line',
         data:{
           labels:months,
           datasets:[{
-            label:'Circulating Supply',
-            data:data,
-            borderColor:'${C}',
-            backgroundColor:'rgba(16,185,129,0.07)',
-            borderWidth:2.5,
-            fill:true,
-            tension:0.4,
-            pointRadius:0,
-            pointHoverRadius:5,
+            data:data,borderColor:'${C}',
+            backgroundColor:'rgba(16,185,129,0.06)',
+            borderWidth:2,fill:true,tension:0.4,
+            pointRadius:0,pointHoverRadius:4,
             pointHoverBackgroundColor:'${CL}',
             pointHoverBorderColor:'#fff',
             pointHoverBorderWidth:2
@@ -873,25 +966,30 @@ export function homePage(): string {
           plugins:{
             legend:{display:false},
             tooltip:{
-              backgroundColor:'#0d1822',
-              borderColor:'rgba(16,185,129,0.25)',
-              borderWidth:1,
-              titleColor:'#fff',
-              bodyColor:'#8891a5',
-              padding:12,
-              callbacks:{label:ctx=>' '+(ctx.parsed.y/1000).toFixed(2)+'B ZNTR ('+(ctx.parsed.y/100).toFixed(2)+'%)'}
+              backgroundColor:'#0c1318',
+              borderColor:'rgba(16,185,129,0.2)',
+              borderWidth:1,titleColor:'#fff',bodyColor:'#6b7d8a',
+              padding:10,
+              callbacks:{label:c=>' '+(c.parsed.y/1000).toFixed(2)+'B ZNTR ('+(c.parsed.y/100).toFixed(2)+'%)'}
             }
           },
           scales:{
-            x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#5a6278',font:{size:11},maxTicksLimit:12},border:{color:'rgba(255,255,255,0.06)'}},
-            y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#5a6278',font:{size:11},callback:val=>(val/1000).toFixed(1)+'B'},border:{color:'rgba(255,255,255,0.06)'}}
+            x:{grid:{color:'rgba(255,255,255,0.03)'},ticks:{color:'#3a4a54',font:{size:10},maxTicksLimit:12},border:{color:'rgba(255,255,255,0.05)'}},
+            y:{grid:{color:'rgba(255,255,255,0.03)'},ticks:{color:'#3a4a54',font:{size:10},callback:v=>(v/1000).toFixed(1)+'B'},border:{color:'rgba(255,255,255,0.05)'}}
           }
         }
       });
-    })();
+    }
+
+    // Demo progress bar animation
+    document.querySelectorAll('.z-prog-fill').forEach(el=>{
+      const w=el.dataset.w||0;
+      setTimeout(()=>{ el.style.width=w+'%'; },400);
+    });
+  })();
   </script>`
 
-  const body = hero + trustBar + howItWorks + features + ecosystem + tokenomics + roadmap + team + partners + stats + getStarted + community + faq + cta + responsive + chartScript
+  const body = hero + metricsBar + demo + architecture + token + network + roadmap + team + partners + community + faq + cta + responsive + charts
 
   return layout(`${PROJECT.name} — ${PROJECT.tagline}`, body)
 }
