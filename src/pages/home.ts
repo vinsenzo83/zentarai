@@ -103,32 +103,6 @@ export function homePage(): string {
             </div>
             <span style="font-family:var(--z-mono);font-size:0.6rem;color:var(--z-dim);border:1px solid rgba(255,255,255,0.08);padding:2px 8px;white-space:nowrap;flex-shrink:0;">PRE-TGE</span>
           </div>
-
-          <!-- Brand Assets Download -->
-          <div style="display:flex;align-items:center;gap:10px;padding:0.65rem 0.875rem;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.12);margin-top:0.5rem;animation:z-glow-in 0.6s ease 0.5s both;">
-            <img src="/static/logo-icon.svg" alt="ZentarAI Logo" style="width:28px;height:28px;flex-shrink:0;"/>
-            <div style="flex:1;min-width:0;">
-              <div style="font-family:var(--z-mono);font-size:0.58rem;color:${C};letter-spacing:1px;text-transform:uppercase;">BRAND ASSETS</div>
-              <div style="font-size:0.65rem;color:var(--z-dim);margin-top:1px;">Official logo kit — SVG format</div>
-            </div>
-            <div style="display:flex;gap:6px;flex-shrink:0;">
-              <a href="/static/logo-square.svg" download="zentarai-logo-square.svg"
-                 style="display:inline-flex;align-items:center;gap:4px;font-family:var(--z-mono);font-size:0.6rem;color:${C};border:1px solid ${C}30;padding:3px 8px;text-decoration:none;transition:all 0.2s;letter-spacing:0.5px;"
-                 onmouseover="this.style.background='${C}15'" onmouseout="this.style.background='transparent'">
-                <i class="fas fa-download" style="font-size:0.55rem;"></i> 1:1
-              </a>
-              <a href="/static/logo-horizontal.svg" download="zentarai-logo-horizontal.svg"
-                 style="display:inline-flex;align-items:center;gap:4px;font-family:var(--z-mono);font-size:0.6rem;color:${C};border:1px solid ${C}30;padding:3px 8px;text-decoration:none;transition:all 0.2s;letter-spacing:0.5px;"
-                 onmouseover="this.style.background='${C}15'" onmouseout="this.style.background='transparent'">
-                <i class="fas fa-download" style="font-size:0.55rem;"></i> 16:3
-              </a>
-              <a href="/static/logo-icon.svg" download="zentarai-logo-icon.svg"
-                 style="display:inline-flex;align-items:center;gap:4px;font-family:var(--z-mono);font-size:0.6rem;color:${C};border:1px solid ${C}30;padding:3px 8px;text-decoration:none;transition:all 0.2s;letter-spacing:0.5px;"
-                 onmouseover="this.style.background='${C}15'" onmouseout="this.style.background='transparent'">
-                <i class="fas fa-download" style="font-size:0.55rem;"></i> icon
-              </a>
-            </div>
-          </div>
         </div>
 
         <!-- RIGHT: Live signal terminal demo -->
