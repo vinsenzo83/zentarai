@@ -55,14 +55,34 @@ export function homePage(): string {
           </p>
 
           <!-- Buttons -->
-          <div style="display:flex;gap:0.875rem;flex-wrap:wrap;margin-bottom:2.5rem;animation:z-glow-in 0.6s ease 0.3s both;">
+          <div style="display:flex;gap:0.875rem;flex-wrap:wrap;margin-bottom:2rem;animation:z-glow-in 0.6s ease 0.3s both;">
             <a href="/#signal" class="z-btn"><i class="fas fa-terminal" style="font-size:0.7rem;"></i> explore_signal</a>
             <a href="/whitepaper" class="z-btn-outline"><i class="fas fa-book" style="font-size:0.7rem;"></i> read_docs</a>
             <a href="/login" class="z-btn-ghost"><i class="fas fa-wallet" style="font-size:0.7rem;"></i> connect</a>
           </div>
 
+          <!-- Get Started 3-step -->
+          <div style="display:flex;align-items:center;gap:0;margin-bottom:2rem;animation:z-glow-in 0.6s ease 0.35s both;overflow:hidden;border:1px solid rgba(16,185,129,0.12);">
+            ${[
+              {n:'01', label:'Create Account', desc:'Email or wallet', icon:'fas fa-user-plus'},
+              {n:'02', label:'Connect Wallet', desc:'MetaMask / WalletConnect', icon:'fas fa-wallet'},
+              {n:'03', label:'Read Signals',   desc:'Live intelligence feed', icon:'fas fa-satellite-dish'},
+            ].map((s,i) => `
+            <div style="flex:1;padding:0.875rem;${i<2?'border-right:1px solid rgba(16,185,129,0.1);':''}display:flex;align-items:center;gap:10px;background:${i===0?C+'08':'transparent'};transition:background 0.2s;"
+              onmouseover="this.style.background='${C}0a'" onmouseout="this.style.background='${i===0?C+'08':'transparent'}'">
+              <div style="width:28px;height:28px;background:${C}15;border:1px solid ${C}30;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="${s.icon}" style="color:${C};font-size:0.65rem;"></i>
+              </div>
+              <div style="min-width:0;">
+                <div style="font-family:var(--z-mono);font-size:0.58rem;color:${C};letter-spacing:1px;margin-bottom:1px;">${s.n}</div>
+                <div style="font-family:var(--z-sans);font-size:0.78rem;font-weight:600;color:white;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.label}</div>
+                <div style="font-size:0.65rem;color:var(--z-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.desc}</div>
+              </div>
+            </div>`).join('')}
+          </div>
+
           <!-- Stat row — terminal style -->
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(16,185,129,0.12);animation:z-glow-in 0.6s ease 0.4s both;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(16,185,129,0.12);animation:z-glow-in 0.6s ease 0.4s both;margin-bottom:1.25rem;">
             ${[
               {v:'10B', l:'ZNTR Supply', c:C},
               {v:'Q2 2026', l:'TGE Target', c:CL},
@@ -72,6 +92,20 @@ export function homePage(): string {
               <div style="font-family:var(--z-mono);font-size:1.3rem;font-weight:700;color:${s.c};letter-spacing:-1px;">${s.v}</div>
               <div style="font-family:var(--z-mono);font-size:0.63rem;color:var(--z-dim);margin-top:3px;letter-spacing:1px;text-transform:uppercase;">${s.l}</div>
             </div>`).join('')}
+          </div>
+
+          <!-- Contract Address Banner -->
+          <div style="display:flex;align-items:center;gap:10px;padding:0.6rem 0.875rem;background:rgba(251,191,36,0.05);border:1px solid rgba(251,191,36,0.2);animation:z-glow-in 0.6s ease 0.45s both;">
+            <i class="fas fa-file-contract" style="color:#f3ba2f;font-size:0.75rem;flex-shrink:0;"></i>
+            <div style="flex:1;min-width:0;">
+              <span style="font-family:var(--z-mono);font-size:0.58rem;color:#f3ba2f;letter-spacing:1px;text-transform:uppercase;">CONTRACT</span>
+              <span style="font-family:var(--z-mono);font-size:0.68rem;color:var(--z-muted);margin-left:8px;word-break:break-all;">${PROJECT.contractAddress}</span>
+            </div>
+            <a href="https://bscscan.com/token/${PROJECT.contractAddress}" target="_blank" rel="noopener"
+              style="font-family:var(--z-mono);font-size:0.6rem;color:#f3ba2f;border:1px solid rgba(251,191,36,0.3);padding:2px 8px;white-space:nowrap;text-decoration:none;flex-shrink:0;"
+              onmouseover="this.style.background='rgba(251,191,36,0.1)'" onmouseout="this.style.background='transparent'">
+              BSCScan ↗
+            </a>
           </div>
         </div>
 
@@ -161,6 +195,36 @@ export function homePage(): string {
     setTimeout(type, 1800);
   })();
   </script>`
+
+  /* ══════════════════════════════════════
+     CONTRACT ADDRESS TOP BANNER
+  ══════════════════════════════════════ */
+  const contractBanner = `
+  <div style="background:#0a0f08;border-bottom:1px solid rgba(251,191,36,0.15);padding:0.5rem 0;overflow:hidden;position:relative;">
+    <div class="z-inner">
+      <div style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="width:6px;height:6px;background:#f3ba2f;display:block;animation:z-signal-pulse 2s infinite;"></span>
+          <span style="font-family:var(--z-mono);font-size:0.65rem;color:#f3ba2f;letter-spacing:1px;text-transform:uppercase;">ZNTR CONTRACT ADDRESS</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-family:var(--z-mono);font-size:0.72rem;color:var(--z-muted);letter-spacing:0.5px;">${PROJECT.contractAddress}</span>
+          <button onclick="navigator.clipboard.writeText('${PROJECT.contractAddress}').then(()=>{ this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy',1500); })"
+            style="font-family:var(--z-mono);font-size:0.6rem;color:#f3ba2f;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);padding:2px 10px;cursor:pointer;transition:background 0.2s;"
+            onmouseover="this.style.background='rgba(251,191,36,0.15)'" onmouseout="this.style.background='rgba(251,191,36,0.08)'">Copy</button>
+          <a href="https://bscscan.com/token/${PROJECT.contractAddress}" target="_blank" rel="noopener"
+            style="font-family:var(--z-mono);font-size:0.6rem;color:#f3ba2f;border:1px solid rgba(251,191,36,0.25);padding:2px 10px;text-decoration:none;background:rgba(251,191,36,0.05);"
+            onmouseover="this.style.background='rgba(251,191,36,0.12)'" onmouseout="this.style.background='rgba(251,191,36,0.05)'">
+            BSCScan ↗
+          </a>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <i class="fas fa-link" style="color:#f3ba2f;font-size:0.6rem;"></i>
+          <span style="font-family:var(--z-mono);font-size:0.62rem;color:var(--z-dim);">BNB Chain · BEP-20 · TGE Q2 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>`
 
   /* ══════════════════════════════════════
      SIGNAL METRICS BAR
@@ -899,6 +963,8 @@ export function homePage(): string {
   /* ── CHARTS ── */
   const charts = `
   <script>
+  // Chart.js가 async 로딩이므로 준비 완료 후 실행
+  function initCharts(){
   (function(){
     // Tokenomics donut
     const tCtx = document.getElementById('tokenomicsChart');
@@ -987,9 +1053,18 @@ export function homePage(): string {
       setTimeout(()=>{ el.style.width=w+'%'; },400);
     });
   })();
+  }
+  // Chart.js async 대응: 로드 완료 시점에 맞춰 실행
+  if(typeof Chart !== 'undefined'){
+    initCharts();
+  } else {
+    document.querySelector('script[src*="chart.js"]').addEventListener('load', initCharts);
+    // fallback: 1초 후에도 Chart가 없으면 재시도
+    setTimeout(function(){ if(typeof Chart !== 'undefined' && !window._chartDone){ initCharts(); window._chartDone=true; } }, 1000);
+  }
   </script>`
 
-  const body = hero + metricsBar + demo + architecture + token + network + roadmap + team + partners + community + faq + cta + responsive + charts
+  const body = hero + contractBanner + metricsBar + demo + architecture + token + network + roadmap + team + partners + community + faq + cta + responsive + charts
 
   return layout(`${PROJECT.name} — ${PROJECT.tagline}`, body)
 }

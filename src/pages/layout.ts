@@ -17,10 +17,18 @@ export function layout(title: string, body: string, extraHead = ''): string {
   <meta property="og:description" content="${PROJECT.description}"/>
   <meta property="og:type" content="website"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23030507'/><text x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-size='18' fill='%2310b981'>Z</text></svg>"/>
+  <!-- DNS prefetch + preconnect for faster font loading -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <!-- Fonts: display=swap prevents render blocking -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500&display=swap"/>
+  <!-- FontAwesome: load after page paint (non-blocking) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/></noscript>
+  <!-- Chart.js: async load so it doesn't block first paint -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" async></script>
   ${extraHead}
   <style>
     /* ════════════════════════════════════════

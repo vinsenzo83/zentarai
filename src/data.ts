@@ -22,9 +22,9 @@ export const PROJECT = {
     github: 'https://github.com/vinsenzo83/zentarai',
     twitter: 'https://x.com/intellora_',
     telegram: 'https://t.me/ZentarAI',
-    bscscan: '',
+    bscscan: 'https://bscscan.com/token/0x33c5502261c589a2EC4B1a6C4350aBF60ef47254',
   },
-  contractAddress: '',
+  contractAddress: '0x33c5502261c589a2EC4B1a6C4350aBF60ef47254',
   tokenKey: '',
   sourceCodeUrl: 'https://github.com/vinsenzo83/zentarai/archive/refs/heads/main.zip',
   team: [
