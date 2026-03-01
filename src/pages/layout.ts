@@ -16,10 +16,11 @@ export function layout(title: string, body: string, extraHead = ''): string {
   <meta property="og:title" content="${title}"/>
   <meta property="og:description" content="${PROJECT.description}"/>
   <meta property="og:type" content="website"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23030507'/><text x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-size='18' fill='%2310b981'>Z</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
   ${extraHead}
   <style>
     /* ════════════════════════════════════════
@@ -399,6 +400,11 @@ export function layout(title: string, body: string, extraHead = ''): string {
       color:${C};letter-spacing:-2px;line-height:1;
     }
 
+    /* ── LIVE FEED LABELS ── */
+    .z-feed-type, .z-feed-ts {
+      font-family: var(--z-mono);
+    }
+
     /* ── FOOTER ── */
     .z-footer {
       border-top:1px solid var(--z-line);
@@ -538,9 +544,9 @@ document.querySelectorAll('[data-target]').forEach(el=>_cntObs.observe(el));
       );
       row.innerHTML =
         '<i class="fas '+s.icon+'" style="color:'+s.c+';font-size:0.62rem;flex-shrink:0;width:11px;"></i>'+
-        '<span style="font-family:\'Space Mono\',monospace;font-size:0.59rem;color:'+s.c+';flex-shrink:0;letter-spacing:0.8px;">['+s.type+']</span>'+
+        '<span class="z-feed-type" style="font-size:0.59rem;color:'+s.c+';flex-shrink:0;letter-spacing:0.8px;">['+s.type+']</span>'+
         '<span style="font-size:0.68rem;color:#6b7d8a;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+s.msg+'</span>'+
-        '<span style="font-family:\'Space Mono\',monospace;font-size:0.56rem;color:#3a4a54;flex-shrink:0;">now</span>';
+        '<span class="z-feed-ts" style="font-size:0.56rem;color:#3a4a54;flex-shrink:0;">now</span>';
       feed.insertBefore(row, feed.firstChild);
       requestAnimationFrame(function(){ row.style.opacity='1'; });
       while(feed.children.length > 6){
